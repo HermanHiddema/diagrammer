@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+	<style>
+	</style>
+	<link rel="stylesheet" href="normalize.css" />
+	<link rel="stylesheet" href="diagrammer.css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="diagrammer.js"></script>
+</head>
+<body>
+	<h2>Diagram Builder</h2>
+	<div class="column">
+		<div class="board">
+			<div class="grid">
+				<div class="data">
+					<table></table>
+				</div>
+				<div class="viewport">
+				</div>
+				<div class="overlay">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="column">
+		<div class="tools">
+			<div tool="black"    class="black stone tool"></div>
+			<div tool="white"    class="white stone tool"></div>
+			<div tool="move"     class="move tool"></div>
+			<div tool="triangle" class="marker tool triangle"></div>
+			<div tool="circle"   class="marker tool circle"></div>
+			<div tool="square"   class="marker tool square"></div>
+			<div tool="cross"    class="marker tool cross"></div>
+			<div tool="greyed"   class="marker tool greyed"></div>
+			<div tool="label"    class="label tool">
+				<label for"label">Label:</label>
+				<select id="label" name="label">
+					<option>a</option>
+					<option>b</option>
+				</select>
+			</div>
+		</div>
+		<h4>Output</h4>
+		<div class="output" >
+			<div id="output">bla</div>
+		</div>
+	</div>
+</body>
+</html>
