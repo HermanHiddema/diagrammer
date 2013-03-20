@@ -14,27 +14,35 @@ function init() {
 		'width':'' + (board.width) + 'em',
 		'height': '' + (board.height) + 'em'
 	});
-	$('.data table').html('')
+	$('.data').html('')
 
+	table = $('<table />')
 	for (row = 0; row < board.height; row++) {
 		table_row = $('<tr></tr>');
 		for (col = 0; col < board.width; col++) {
 			cell = $('<td></td>').addClass('empty');
-			if (col==0)              { cell.addClass('left'  ); }
-			if (row==0)              { cell.addClass('top'   ); }
+
 			if (col==board.width-1)  { cell.addClass('right' ); }
+			else if (col==0)         { cell.addClass('left'  ); }
+			else                     { cell.addClass('center'); }
+
 			if (row==board.height-1) { cell.addClass('bottom'); }
+			else if (row==0)         { cell.addClass('top'   ); }
+			else                     { cell.addClass('middle'); }
+
 			if (hoshi(col, row, board.width-1, board.height-1)) {
 				cell.addClass('hoshi');
 				cell.attr('data', ',');
 			}
 			else {
+				cell.addClass('normal')
 				cell.attr('data', '.');				
 			}
 			table_row.append(cell)
 		}
-		$('.data table').append(table_row)
+		table.append(table_row)
 	}
+	$('.data').append(table)
 }
 
 /**
@@ -163,26 +171,32 @@ function stone(cell, color) {
 function marker(cell, mark) {
 	if ($(cell).hasClass(mark)) {
 		$(cell).removeClass(mark)
+		if ($(cell).hasClass('empty')) {
+			$(cell).attr("data", $(cell).hasClass('hoshi')?',':'.');
+		}
+		else {
+			$(cell).attr("data", $(cell).hasClass('black') ? 'X' : 'O');
+		}
 	}
 	else {
 		$(cell).removeClass('triangle circle square cross greyed')
 		$(cell).addClass(mark)
-	}
-	if ($(cell).hasClass('empty')) {
-		switch(tool) {
-			case 'circle':   $(cell).attr("data", "C"); break; 
-			case 'cross':    $(cell).attr("data", "M"); break;
-			case 'triangle': $(cell).attr("data", "C"); break;
-			case 'square':   $(cell).attr("data", "S"); break;
-			case 'greyed':   $(cell).attr("data", "?"); break;
+		if ($(cell).hasClass('empty')) {
+			switch(tool) {
+				case 'circle':   $(cell).attr("data", "C"); break; 
+				case 'cross':    $(cell).attr("data", "M"); break;
+				case 'triangle': $(cell).attr("data", "T"); break;
+				case 'square':   $(cell).attr("data", "S"); break;
+				case 'greyed':   $(cell).attr("data", "?"); break;
+			}
 		}
-	}
-	else {
-		switch(tool) {
-			case 'circle':   $(cell).attr("data", $(cell).hasClass('black') ? 'B' : 'W'); break; 
-			case 'cross':    $(cell).attr("data", $(cell).hasClass('black') ? 'Z' : 'P'); break;
-			case 'triangle': $(cell).attr("data", $(cell).hasClass('black') ? 'Y' : 'Q'); break;
-			case 'square':   $(cell).attr("data", $(cell).hasClass('black') ? '#' : '@'); break;
+		else {
+			switch(tool) {
+				case 'circle':   $(cell).attr("data", $(cell).hasClass('black') ? 'B' : 'W'); break; 
+				case 'cross':    $(cell).attr("data", $(cell).hasClass('black') ? 'Z' : 'P'); break;
+				case 'triangle': $(cell).attr("data", $(cell).hasClass('black') ? 'Y' : 'Q'); break;
+				case 'square':   $(cell).attr("data", $(cell).hasClass('black') ? '#' : '@'); break;
+			}
 		}
 	}
 }
@@ -192,8 +206,14 @@ function label(cell, label) {
 		alert("You can only label empty points. For stones, use markers.")
 	}
 	else {
-		$(cell).attr("data", label);
-		$(cell).append($('<span class="label">'+label+'</span>'))
+		$(cell).removeClass('triangle circle square cross greyed')
+		if ($(cell).attr("data") == label) {
+			$(cell).attr("data", $(cell).hasClass('hoshi')?',':'.')
+		}
+		else {
+			$(cell).attr("data", label);
+			$(cell).append($('<span class="label">'+label+'</span>'))
+		}
 	}
 }
 function move(cell) {
@@ -224,6 +244,7 @@ $(document).on('click', 'td', function(){
 $(document).on('contextmenu', 'td', function(){
 	if (tool == 'black' || tool == 'white') {
 		stone($(this), tool == 'black' ? 'white' : 'black')
+		draw();
 		return false;
 	}
 });

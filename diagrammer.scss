@@ -1,18 +1,12 @@
-$grid: 23px;
-$left: 0;
-$top: 0;
-$middle: 1;
-$right: 2;
-$bottom: 2;
+@import 'normalize';
 
-@mixin sprite($x, $y)   { background-position: (-$x      * $grid) (-$y * $grid); }
-@mixin empty($x, $y)    { background-position: (-$x      * $grid) (-$y * $grid); }
-@mixin hoshi($x, $y)    { background-position: ((-3-$x)  * $grid) (-$y * $grid); }
-@mixin triangle($x, $y) { background-position: ((-6-$x)  * $grid) (-$y * $grid); }
-@mixin circle($x, $y)   { background-position: ((-9-$x)  * $grid) (-$y * $grid); }
-@mixin square($x, $y)   { background-position: ((-12-$x) * $grid) (-$y * $grid); }
-@mixin cross($x, $y)    { background-position: ((-15-$x) * $grid) (-$y * $grid); }
-@mixin greyed($x, $y)   { background-position: ((-18-$x) * $grid) (-$y * $grid); }
+$grid: 23px;
+
+@mixin sprite($s, $x, $y) {
+	$bgx: -($s - 1);
+	$bgy: -(3 * $y + $x - 3);
+	background-position: ($bgx * $grid) ($bgy * $grid); 
+}
 
 .data {
 	position: absolute;
@@ -28,100 +22,30 @@ $bottom: 2;
 			padding: 0;
 			background-color: #f2b06d;
 			background-image: url(diagrammer.png);
-			background-repeat: no-repeat;							
+			background-repeat: no-repeat;
 
-			&.empty { 
-				@include empty($middle, $middle);
-				&.hoshi    { @include hoshi($middle, $middle) }
-				&.triangle { @include triangle($middle, $middle); }
-				&.circle   { @include circle($middle, $middle); }
-				&.square   { @include square($middle, $middle); }
-				&.cross    { @include cross($middle, $middle); }
-				&.greyed   { @include greyed($middle, $middle); }
-				
-				&.left.top { 
-					@include empty($left, $top);
-					&.hoshi    { @include hoshi($left, $top) }
-					&.triangle { @include triangle($left, $top); }
-					&.circle   { @include circle($left, $top); }
-					&.square   { @include square($left, $top); }
-					&.cross    { @include cross($left, $top); }
-					&.greyed   { @include greyed($left, $top); }
+			$list: normal, hoshi, triangle, circle, square, cross, greyed;
+			$rows: top, middle, bottom;
+			$cols: left, center, right;
+			$stones: black, white;
+			@for $i from 1 through length($list) {
+				$item: nth($list, $i);
+				@for $r from 1 through length($rows) {
+					$row: nth($rows, $r);
+					@for $c from 1 through length($cols) {
+						$col: nth($cols, $c);
+						&.empty.#{$item}.#{$row}.#{$col} {
+							@include sprite($i, $c, $r);
+						}
+					}
 				}
-				&.right.top {
-					@include empty($right, $top);
-					&.hoshi    { @include hoshi($right, $top) }
-					&.triangle { @include triangle($right, $top); }
-					&.circle   { @include circle($right, $top); }
-					&.square   { @include square($right, $top); }
-					&.cross    { @include cross($right, $top); }
-					&.greyed   { @include greyed($right, $top); }
-				}
-				&.left.bottom {
-					@include empty($left, $bottom);
-					&.hoshi    { @include hoshi($left, $bottom) }
-					&.triangle { @include triangle($left, $bottom); }
-					&.circle   { @include circle($left, $bottom); }
-					&.square   { @include square($left, $bottom); }
-					&.cross    { @include cross($left, $bottom); }
-					&.greyed   { @include greyed($left, $bottom); }
-				}
-				&.right.bottom {
-					@include empty($right, $bottom);
-					&.hoshi    { @include hoshi($right, $bottom) }
-					&.triangle { @include triangle($right, $bottom); }
-					&.circle   { @include circle($right, $bottom); }
-					&.square   { @include square($right, $bottom); }
-					&.cross    { @include cross($right, $bottom); }
-					&.greyed   { @include greyed($right, $bottom); }
-				}
-				&.left {
-					@include empty($left, $middle);
-					&.hoshi    { @include hoshi($left, $middle) }
-					&.triangle { @include triangle($left, $middle); }
-					&.circle   { @include circle($left, $middle); }
-					&.square   { @include square($left, $middle); }
-					&.cross    { @include cross($left, $middle); }
-					&.greyed   { @include greyed($left, $middle); }
-				}
-				&.top {
-					@include empty($middle, $top);
-					&.hoshi    { @include hoshi($middle, $top) }
-					&.triangle { @include triangle($middle, $top); }
-					&.circle   { @include circle($middle, $top); }
-					&.square   { @include square($middle, $top); }
-					&.cross    { @include cross($middle, $top); }
-					&.greyed   { @include greyed($middle, $top); }
-				}
-				&.bottom {
-					@include empty($middle, $bottom);
-					&.hoshi    { @include hoshi($middle, $bottom) }
-					&.triangle { @include triangle($middle, $bottom); }
-					&.circle   { @include circle($middle, $bottom); }
-					&.square   { @include square($middle, $bottom); }
-					&.cross    { @include cross($middle, $bottom); }
-					&.greyed   { @include greyed($middle, $bottom); }
-				}
-				&.right {
-					@include empty($right, $middle);
-					&.hoshi    { @include hoshi($right, $middle) }
-					&.triangle { @include triangle($right, $middle); }
-					&.circle   { @include circle($right, $middle); }
-					&.square   { @include square($right, $middle); }
-					&.cross    { @include cross($right, $middle); }
-					&.greyed   { @include greyed($right, $middle); }
-				}
+				@for $s from 1 through length($stones) {
+					$stone: nth($stones, $s);
+					&.#{$stone}.#{$item} {
+						@include sprite($i, $s, 4)
+					}
+				}	
 			}
-
-			&.black {
-				@include sprite(0,3);
-				&.triangle { @include sprite(2,3); }
-				&.circle   { @include sprite(1,3); }
-				&.square   { @include sprite(4,3); }
-				&.cross    { @include sprite(3,3); }
-
-			}
-			&.white { background-position: 0px -92px; }
 
 			.label {
 				display: block;
@@ -195,16 +119,14 @@ h4 {
 		&.active {
 			border-color: red;
 		}
-		&.black { @include empty(0,3) }
-		&.white { @include empty(0,4) }
-		&.marker {
-			&.triangle { @include empty(1,5) }
-			&.circle { @include empty(2,5) }
-			&.square { @include empty(3,5) }
-			&.cross { @include empty(4,5) }
-			&.greyed { @include empty(5,5) }
-		}
-		&.label {
+		&.black    { @include sprite(1,1,4) }
+		&.white    { @include sprite(1,2,4) }
+		&.triangle { @include sprite(3,0,1) }
+		&.circle   { @include sprite(4,0,1) }
+		&.square   { @include sprite(5,0,1) }
+		&.cross    { @include sprite(6,0,1) }
+		&.greyed   { @include sprite(7,0,1) }
+		&.label,&.move {
 			width: auto;
 			padding: 0 2px;
 			background-color: #f2b06d;
@@ -217,68 +139,68 @@ h4 {
 
 // Styles for the jQuery UI Resizable plugin
 .ui-resizable {
-    position: relative;
+	position: relative;
 }
 .ui-resizable-handle {
-    display: block;
-    font-size: 0.1px;
-    position: absolute;
+	display: block;
+	font-size: 0.1px;
+	position: absolute;
 }
 .ui-resizable-disabled, .ui-resizable-autohide {
 	.ui-resizable-handle {
-    	display: none;
-    }
+		display: none;
+	}
 }
 .ui-resizable-n {
-    cursor: n-resize;
-    height: 7px;
-    left: 0;
-    top: 0px;
-    width: 100%;
+	cursor: n-resize;
+	height: 7px;
+	left: 0;
+	top: 0px;
+	width: 100%;
 }
 .ui-resizable-s {
-    bottom: 0px;
-    cursor: s-resize;
-    height: 7px;
-    left: 0;
-    width: 100%;
+	bottom: 0px;
+	cursor: s-resize;
+	height: 7px;
+	left: 0;
+	width: 100%;
 }
 .ui-resizable-e {
-    cursor: e-resize;
-    height: 100%;
-    right: 0px;
-    top: 0;
-    width: 7px;
+	cursor: e-resize;
+	height: 100%;
+	right: 0px;
+	top: 0;
+	width: 7px;
 }
 .ui-resizable-w {
-    cursor: w-resize;
-    height: 100%;
-    left: 0px;
-    top: 0;
-    width: 7px;
+	cursor: w-resize;
+	height: 100%;
+	left: 0px;
+	top: 0;
+	width: 7px;
 }
 // icon and settings for the diagonal resize handles
 @mixin resizer($dir1, $dir2) {
-    background: linear-gradient(to $dir1 $dir2, transparent 50%, #222, transparent, #222, transparent, #222, transparent);	
-    #{$dir1}: 1px;
-    #{$dir2}: 1px;
-    height: 9px;
-    width: 9px;
+	background: linear-gradient(to $dir1 $dir2, transparent 50%, #222, transparent, #222, transparent, #222, transparent);	
+	#{$dir1}: 1px;
+	#{$dir2}: 1px;
+	height: 9px;
+	width: 9px;
 }
 .ui-resizable-se {
-    cursor: se-resize;
-    @include resizer(bottom, right);
+	cursor: se-resize;
+	@include resizer(bottom, right);
 }
 .ui-resizable-sw {
-    cursor: sw-resize;
-    @include resizer(bottom, left);
+	cursor: sw-resize;
+	@include resizer(bottom, left);
 }
 .ui-resizable-nw {
-    cursor: nw-resize;
-    @include resizer(top, left);
+	cursor: nw-resize;
+	@include resizer(top, left);
 }
 .ui-resizable-ne {
-    cursor: ne-resize;
-    @include resizer(top, right);
+	cursor: ne-resize;
+	@include resizer(top, right);
 }
 
