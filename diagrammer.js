@@ -109,7 +109,7 @@ function draw() {
 	});
 
 	lines = Array();
-	lines.push('$$B')
+	lines.push(oddcolor == 'black' ? '$$B' : '$$W');
 	hedge = Array(viewport.width).join('--') + '-'
 
 	if (edges.north || edges.south) {
@@ -300,6 +300,7 @@ $(document).on('click', '.helper', function(){
   			$(this).addClass('black').removeClass('white');  			
   		}
   	});
+  	draw();
 });
 
 
