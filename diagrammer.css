@@ -5,7 +5,6 @@
 /**
  * Correct `block` display not defined in IE 8/9.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\0000322}}
 article,
 aside,
 details,
@@ -23,7 +22,6 @@ summary {
 /**
  * Correct `inline-block` display not defined in IE 8/9.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\0000332}}
 audio,
 canvas,
 video {
@@ -33,7 +31,6 @@ video {
  * Prevent modern browsers from displaying `audio` without controls.
  * Remove excess height in iOS 5 devices.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\0000341}}
 audio:not([controls]) {
   display: none;
   height: 0; }
@@ -41,7 +38,6 @@ audio:not([controls]) {
 /**
  * Address styling not present in IE 8/9.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\0000350}}
 [hidden] {
   display: none; }
 
@@ -53,7 +49,6 @@ audio:not([controls]) {
  * 2. Prevent iOS text size adjust after orientation change, without disabling
  *    user zoom.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\0000364}}
 html {
   font-family: sans-serif;
   /* 1 */
@@ -65,7 +60,6 @@ html {
 /**
  * Remove default margin.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\0000374}}
 body {
   margin: 0; }
 
@@ -75,14 +69,12 @@ body {
 /**
  * Address `outline` inconsistency between Chrome and other browsers.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\0000386}}
 a:focus {
   outline: thin dotted; }
 
 /**
  * Improve readability when focused and also mouse hovered in all browsers.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\0000395}}
 a:active,
 a:hover {
   outline: 0; }
@@ -94,7 +86,6 @@ a:hover {
  * Address variable `h1` font-size and margin within `section` and `article`
  * contexts in Firefox 4+, Safari 5, and Chrome.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003108}}
 h1 {
   font-size: 2em;
   margin: 0.67em 0; }
@@ -102,14 +93,12 @@ h1 {
 /**
  * Address styling not present in IE 8/9, Safari 5, and Chrome.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003117}}
 abbr[title] {
   border-bottom: 1px dotted; }
 
 /**
  * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003126}}
 b,
 strong {
   font-weight: bold; }
@@ -117,14 +106,12 @@ strong {
 /**
  * Address styling not present in Safari 5 and Chrome.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003134}}
 dfn {
   font-style: italic; }
 
 /**
  * Address differences between Firefox and other browsers.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003142}}
 hr {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
@@ -133,7 +120,6 @@ hr {
 /**
  * Address styling not present in IE 8/9.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003152}}
 mark {
   background: #ff0;
   color: #000; }
@@ -141,7 +127,6 @@ mark {
 /**
  * Correct font family set oddly in Safari 5 and Chrome.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003164}}
 code,
 kbd,
 pre,
@@ -152,28 +137,24 @@ samp {
 /**
  * Improve readability of pre-formatted text in all browsers.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003173}}
 pre {
   white-space: pre-wrap; }
 
 /**
  * Set consistent quote types.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003181}}
 q {
   quotes: "\201C" "\201D" "\2018" "\2019"; }
 
 /**
  * Address inconsistent and variable font size in all browsers.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003189}}
 small {
   font-size: 80%; }
 
 /**
  * Prevent `sub` and `sup` affecting `line-height` in all browsers.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003198}}
 sub,
 sup {
   font-size: 75%;
@@ -181,11 +162,9 @@ sup {
   position: relative;
   vertical-align: baseline; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003205}}
 sup {
   top: -0.5em; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003209}}
 sub {
   bottom: -0.25em; }
 
@@ -195,14 +174,12 @@ sub {
 /**
  * Remove border when inside `a` element in IE 8/9.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003221}}
 img {
   border: 0; }
 
 /**
  * Correct overflow displayed oddly in IE 9.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003229}}
 svg:not(:root) {
   overflow: hidden; }
 
@@ -212,7 +189,6 @@ svg:not(:root) {
 /**
  * Address margin not present in IE 8/9 and Safari 5.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003241}}
 figure {
   margin: 0; }
 
@@ -222,7 +198,6 @@ figure {
 /**
  * Define consistent border, margin, and padding.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003253}}
 fieldset {
   border: 1px solid #c0c0c0;
   margin: 0 2px;
@@ -232,7 +207,6 @@ fieldset {
  * 1. Correct `color` not being inherited in IE 8/9.
  * 2. Remove padding so people aren't caught out if they zero out fieldsets.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003264}}
 legend {
   border: 0;
   /* 1 */
@@ -244,7 +218,6 @@ legend {
  * 2. Correct font size not being inherited in all browsers.
  * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003278}}
 button,
 input,
 select,
@@ -260,7 +233,6 @@ textarea {
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
  * the UA stylesheet.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003290}}
 button,
 input {
   line-height: normal; }
@@ -271,7 +243,6 @@ input {
  * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
  * Correct `select` style inheritance in Firefox 4+ and Opera.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003302}}
 button,
 select {
   text-transform: none; }
@@ -283,7 +254,6 @@ select {
  * 3. Improve usability and consistency of cursor style between image-type
  *    `input` and others.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003317}}
 button,
 html input[type="button"],
 input[type="reset"],
@@ -296,7 +266,6 @@ input[type="submit"] {
 /**
  * Re-set default cursor for disabled elements.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003327}}
 button[disabled],
 html input[disabled] {
   cursor: default; }
@@ -305,7 +274,6 @@ html input[disabled] {
  * 1. Address box sizing set to `content-box` in IE 8/9.
  * 2. Remove excess padding in IE 8/9.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003337}}
 input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
@@ -318,7 +286,6 @@ input[type="radio"] {
  * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
  *    (include `-moz` to future-proof).
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003348}}
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
@@ -331,7 +298,6 @@ input[type="search"] {
  * Remove inner padding and search cancel button in Safari 5 and Chrome
  * on OS X.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003361}}
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none; }
@@ -339,7 +305,6 @@ input[type="search"]::-webkit-search-decoration {
 /**
  * Remove inner padding and border in Firefox 4+.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003370}}
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
@@ -349,7 +314,6 @@ input::-moz-focus-inner {
  * 1. Remove default vertical scrollbar in IE 8/9.
  * 2. Improve readability and alignment in all browsers.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003380}}
 textarea {
   overflow: auto;
   /* 1 */
@@ -362,260 +326,183 @@ textarea {
 /**
  * Remove most spacing between table cells.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/normalize\.scss}line{font-family:\00003393}}
 table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000311}}
 .data {
   position: absolute;
   overflow: hidden;
   top: 0;
   left: 0; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000317}}
   .data table {
     border-collapse: collapse; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000319}}
     .data table tr td {
+      position: relative;
       width: 23px;
       height: 23px;
       padding: 0;
       background-color: #f2b06d;
       background-image: url(diagrammer.png);
       background-repeat: no-repeat; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.normal.top.left {
         background-position: 0px -23px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.normal.top.center {
         background-position: 0px -46px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.normal.top.right {
         background-position: 0px -69px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.normal.middle.left {
         background-position: 0px -92px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.normal.middle.center {
         background-position: 0px -115px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.normal.middle.right {
         background-position: 0px -138px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.normal.bottom.left {
         background-position: 0px -161px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.normal.bottom.center {
         background-position: 0px -184px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.normal.bottom.right {
         background-position: 0px -207px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.black.normal {
         background-position: 0px -230px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.white.normal {
         background-position: 0px -253px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.hoshi.top.left {
         background-position: -23px -23px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.hoshi.top.center {
         background-position: -23px -46px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.hoshi.top.right {
         background-position: -23px -69px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.hoshi.middle.left {
         background-position: -23px -92px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.hoshi.middle.center {
         background-position: -23px -115px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.hoshi.middle.right {
         background-position: -23px -138px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.hoshi.bottom.left {
         background-position: -23px -161px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.hoshi.bottom.center {
         background-position: -23px -184px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.hoshi.bottom.right {
         background-position: -23px -207px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.black.hoshi {
         background-position: -23px -230px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.white.hoshi {
         background-position: -23px -253px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.triangle.top.left {
         background-position: -46px -23px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.triangle.top.center {
         background-position: -46px -46px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.triangle.top.right {
         background-position: -46px -69px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.triangle.middle.left {
         background-position: -46px -92px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.triangle.middle.center {
         background-position: -46px -115px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.triangle.middle.right {
         background-position: -46px -138px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.triangle.bottom.left {
         background-position: -46px -161px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.triangle.bottom.center {
         background-position: -46px -184px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.triangle.bottom.right {
         background-position: -46px -207px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.black.triangle {
         background-position: -46px -230px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.white.triangle {
         background-position: -46px -253px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.circle.top.left {
         background-position: -69px -23px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.circle.top.center {
         background-position: -69px -46px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.circle.top.right {
         background-position: -69px -69px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.circle.middle.left {
         background-position: -69px -92px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.circle.middle.center {
         background-position: -69px -115px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.circle.middle.right {
         background-position: -69px -138px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.circle.bottom.left {
         background-position: -69px -161px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.circle.bottom.center {
         background-position: -69px -184px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.circle.bottom.right {
         background-position: -69px -207px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.black.circle {
         background-position: -69px -230px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.white.circle {
         background-position: -69px -253px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.square.top.left {
         background-position: -92px -23px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.square.top.center {
         background-position: -92px -46px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.square.top.right {
         background-position: -92px -69px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.square.middle.left {
         background-position: -92px -92px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.square.middle.center {
         background-position: -92px -115px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.square.middle.right {
         background-position: -92px -138px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.square.bottom.left {
         background-position: -92px -161px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.square.bottom.center {
         background-position: -92px -184px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.square.bottom.right {
         background-position: -92px -207px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.black.square {
         background-position: -92px -230px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.white.square {
         background-position: -92px -253px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.cross.top.left {
         background-position: -115px -23px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.cross.top.center {
         background-position: -115px -46px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.cross.top.right {
         background-position: -115px -69px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.cross.middle.left {
         background-position: -115px -92px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.cross.middle.center {
         background-position: -115px -115px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.cross.middle.right {
         background-position: -115px -138px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.cross.bottom.left {
         background-position: -115px -161px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.cross.bottom.center {
         background-position: -115px -184px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.cross.bottom.right {
         background-position: -115px -207px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.black.cross {
         background-position: -115px -230px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.white.cross {
         background-position: -115px -253px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.greyed.top.left {
         background-position: -138px -23px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.greyed.top.center {
         background-position: -138px -46px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.greyed.top.right {
         background-position: -138px -69px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.greyed.middle.left {
         background-position: -138px -92px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.greyed.middle.center {
         background-position: -138px -115px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.greyed.middle.right {
         background-position: -138px -138px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.greyed.bottom.left {
         background-position: -138px -161px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.greyed.bottom.center {
         background-position: -138px -184px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000337}}
       .data table tr td.empty.greyed.bottom.right {
         background-position: -138px -207px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.black.greyed {
         background-position: -138px -230px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000344}}
       .data table tr td.white.greyed {
         background-position: -138px -253px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000350}}
+      .data table tr td.black {
+        color: white; }
+      .data table tr td.white {
+        color: black; }
       .data table tr td .label {
         display: block;
         width: 15.33333px;
@@ -624,18 +511,23 @@ table {
         margin: 0 auto;
         font-size: 16px;
         background-color: #f2b06d; }
+      .data table tr td .move {
+        display: block;
+        width: 21px;
+        margin: 0 auto;
+        text-align: center;
+        overflow: hidden;
+        font-size: 16px;
+        background: transparent; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000363}}
 .column {
   position: relative;
   float: left;
   padding: 0; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000369}}
 h4 {
   padding-left: 10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000372}}
 #output {
   white-space: pre;
   font-family: monospace, serif;
@@ -643,25 +535,20 @@ h4 {
   line-height: 15.33333px;
   padding: 0 100px 100px 10px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000380}}
 .board {
   font-size: 23px;
   background-color: #d99e62;
   padding: 23px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000384}}
   .board .grid {
     position: relative; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000386}}
     .board .grid .viewport {
       position: absolute;
       overflow: hidden;
       left: 0px;
       top: 0px;
       pointer-events: none; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000393}}
       .board .grid .viewport .ui-resizable-handle {
         pointer-events: auto; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\0000397}}
     .board .grid .overlay {
       position: absolute;
       top: 0;
@@ -670,11 +557,9 @@ h4 {
       border-color: rgba(0, 0, 0, 0.1);
       pointer-events: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003108}}
 .tools {
   height: 25px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003110}}
-  .tools .tool {
+  .tools .tool, .tools .helper {
     width: 23px;
     height: 23px;
     float: left;
@@ -682,54 +567,51 @@ h4 {
     border-color: #f2b06d;
     border-style: solid;
     background-image: url(diagrammer.png); }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003119}}
-    .tools .tool.active {
+    .tools .tool.active, .tools .helper.active {
       border-color: red; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003122}}
-    .tools .tool.black {
-      background-position: 0px -230px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003123}}
-    .tools .tool.white {
-      background-position: 0px -253px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003124}}
-    .tools .tool.triangle {
+    .tools .tool.black, .tools .helper.black {
+      background-position: 0px -230px;
+      color: white; }
+    .tools .tool.white, .tools .helper.white {
+      background-position: 0px -253px;
+      color: black; }
+    .tools .tool.triangle, .tools .helper.triangle {
       background-position: -46px 0px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003125}}
-    .tools .tool.circle {
+    .tools .tool.circle, .tools .helper.circle {
       background-position: -69px 0px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003126}}
-    .tools .tool.square {
+    .tools .tool.square, .tools .helper.square {
       background-position: -92px 0px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003127}}
-    .tools .tool.cross {
+    .tools .tool.cross, .tools .helper.cross {
       background-position: -115px 0px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003128}}
-    .tools .tool.greyed {
+    .tools .tool.greyed, .tools .helper.greyed {
       background-position: -138px 0px; }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003129}}
-    .tools .tool.label, .tools .tool.move {
+    .tools .tool.label, .tools .tool.move, .tools .helper.label, .tools .helper.move {
       width: auto;
       padding: 0 2px;
       background-color: #f2b06d;
       background-image: none;
       font-size: 13px;
       line-height: 16px; }
+  .tools .helper span {
+    display: block;
+    width: 21px;
+    margin: 2px auto;
+    text-align: center;
+    overflow: hidden;
+    font-size: 16px;
+    background: transparent; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003141}}
 .ui-resizable {
   position: relative; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003144}}
 .ui-resizable-handle {
   display: block;
   font-size: 0.1px;
   position: absolute; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003150}}
 .ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle {
   display: none; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003154}}
 .ui-resizable-n {
   cursor: n-resize;
   height: 7px;
@@ -737,7 +619,6 @@ h4 {
   top: 0px;
   width: 100%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003161}}
 .ui-resizable-s {
   bottom: 0px;
   cursor: s-resize;
@@ -745,7 +626,6 @@ h4 {
   left: 0;
   width: 100%; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003168}}
 .ui-resizable-e {
   cursor: e-resize;
   height: 100%;
@@ -753,7 +633,6 @@ h4 {
   top: 0;
   width: 7px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003175}}
 .ui-resizable-w {
   cursor: w-resize;
   height: 100%;
@@ -761,7 +640,6 @@ h4 {
   top: 0;
   width: 7px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003190}}
 .ui-resizable-se {
   cursor: se-resize;
   background: linear-gradient(to bottom right, transparent 50%, #222222, transparent, #222222, transparent, #222222, transparent);
@@ -770,7 +648,6 @@ h4 {
   height: 9px;
   width: 9px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003194}}
 .ui-resizable-sw {
   cursor: sw-resize;
   background: linear-gradient(to bottom left, transparent 50%, #222222, transparent, #222222, transparent, #222222, transparent);
@@ -779,7 +656,6 @@ h4 {
   height: 9px;
   width: 9px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003198}}
 .ui-resizable-nw {
   cursor: nw-resize;
   background: linear-gradient(to top left, transparent 50%, #222222, transparent, #222222, transparent, #222222, transparent);
@@ -788,7 +664,6 @@ h4 {
   height: 9px;
   width: 9px; }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/herman\/development\/go\/diagrammer\/diagrammer\.scss}line{font-family:\00003202}}
 .ui-resizable-ne {
   cursor: ne-resize;
   background: linear-gradient(to top right, transparent 50%, #222222, transparent, #222222, transparent, #222222, transparent);

@@ -1,13 +1,20 @@
 var board = {
 	width: 19,
 	height: 19
-}
+};
 
-var tool = 'black'
+var tool = 'black';
+var oddcolor = 'black';
+var evencolor = 'white';
 
 function init() {
-	// board.width = Math.max(1, Math.min(50, parseInt($('#width').val())));
-	// board.height = Math.max(1, Math.min(50, parseInt($('#height').val())));
+	var param = document.URL.split('#')[1];
+	if (param) {
+		params = param.split('x')
+		board.width = Math.max(2, Math.min(50, parseInt(params[0])));
+		board.height = Math.max(2, Math.min(50, parseInt(params[1])));
+	}
+
 	$('.viewport, .grid, .board, .overlay').css({
 		'left':0,
 		'top':0,
@@ -151,6 +158,7 @@ function stone(cell, color) {
 		other = 'white'
 	}
 	$(cell).removeClass('triangle circle square cross greyed')
+	$(cell).html(''); // remove any previous label
 	if ($(cell).hasClass('empty')) { 
 		$(cell).removeClass('empty'); 
 		$(cell).addClass(color);
@@ -179,7 +187,8 @@ function marker(cell, mark) {
 		}
 	}
 	else {
-		$(cell).removeClass('triangle circle square cross greyed')
+		$(cell).html(''); // remove any previous label
+		$(cell).removeClass('triangle circle square cross greyed move')
 		$(cell).addClass(mark)
 		if ($(cell).hasClass('empty')) {
 			switch(tool) {
@@ -206,6 +215,7 @@ function label(cell, label) {
 		alert("You can only label empty points. For stones, use markers.")
 	}
 	else {
+		$(cell).html(''); // remove any previous label
 		$(cell).removeClass('triangle circle square cross greyed')
 		if ($(cell).attr("data") == label) {
 			$(cell).attr("data", $(cell).hasClass('hoshi')?',':'.')
@@ -217,12 +227,19 @@ function label(cell, label) {
 	}
 }
 function move(cell) {
-	alert('Move!')
+	if (! $(cell).hasClass('empty')) {
+		return;
+	}
+	sel = $('#move option:selected');
+	$(cell).removeClass('triangle circle square cross greyed')
+	$(cell).attr("data", sel.val());
+	$(cell).append($('<span class="move">'+(sel.val()==0?10:sel.val())+'</span>'));
+	$(cell).removeClass('black white empty').addClass('move ' + (sel.val()%2?oddcolor:evencolor));
+	$(sel).prop('selected', false).next().prop('selected', true);
 }
 
 
 $(document).on('click', 'td', function(){
-	$(this).html(''); // remove any previous label
 	switch(tool) {
 		case 'black':
 		case 'white': stone($(this), tool); 
@@ -247,6 +264,15 @@ $(document).on('contextmenu', 'td', function(){
 		draw();
 		return false;
 	}
+	if (tool == 'move' && $(this).find('span').length > 0) {
+		$(this).removeClass('black white empty move').addClass('empty');
+		$(this).html('');
+		$(this).attr("data", $(cell).hasClass('hoshi')?',':'.')
+		sel = $('#move option:selected');
+		$(sel).prop('selected', false).prev().prop('selected', true);
+		draw();
+		return false;
+	}
 });
 
 $(document).on('click', '.tool', function(){
@@ -254,6 +280,29 @@ $(document).on('click', '.tool', function(){
   	$(this).addClass('active');
   	tool = $(this).attr('tool')
 });
+
+$(document).on('click', '.helper', function(){
+  	if ($(this).hasClass('black')) {
+  		$(this).addClass('white').removeClass('black');
+  		oddcolor = 'white';
+  		evencolor = 'black';
+  	}
+  	else {
+  		$(this).addClass('black').removeClass('white');  		
+  		oddcolor = 'black';
+  		evencolor = 'white';
+  	}
+  	$('td.move').each(function() {
+  		if ($(this).hasClass('black')) {
+  			$(this).addClass('white').removeClass('black');
+  		}
+  		else {
+  			$(this).addClass('black').removeClass('white');  			
+  		}
+  	});
+});
+
+
 
 $(function() {
 	init();
@@ -264,5 +313,9 @@ $(function() {
 		resize: resized
 	});
 	$('.ui-resizable-se').removeClass('ui-icon ui-icon-gripsmall-diagonal-se');
+	$(window).bind('hashchange',function(){
+		init();
+		draw();
+	});
 	draw();
 });

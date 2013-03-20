@@ -17,6 +17,7 @@ $grid: 23px;
 	table {
 		border-collapse: collapse;
 		tr td {
+			position: relative;
 			width: $grid;
 			height: $grid;
 			padding: 0;
@@ -47,6 +48,13 @@ $grid: 23px;
 				}	
 			}
 
+			&.black {
+				color: white;
+			}
+			&.white {
+				color: black;
+			}
+
 			.label {
 				display: block;
 				width: 2*$grid/3;
@@ -55,6 +63,15 @@ $grid: 23px;
 				margin: 0 auto;
 				font-size: 16px;
 				background-color: #f2b06d;
+			}
+			.move {
+				display: block;
+				width: $grid - 2;
+				margin: 0 auto;
+				text-align: center;
+				overflow: hidden;
+				font-size: 16px;
+				background: transparent;
 			}
 		}
 	}
@@ -107,7 +124,7 @@ h4 {
 
 .tools {
 	height: $grid+2;
-	.tool {
+	.tool, .helper {
 		width: $grid;
 		height: $grid;
 		float: left;
@@ -119,8 +136,8 @@ h4 {
 		&.active {
 			border-color: red;
 		}
-		&.black    { @include sprite(1,1,4) }
-		&.white    { @include sprite(1,2,4) }
+		&.black    { @include sprite(1,1,4); color: white; }
+		&.white    { @include sprite(1,2,4); color: black; }
 		&.triangle { @include sprite(3,0,1) }
 		&.circle   { @include sprite(4,0,1) }
 		&.square   { @include sprite(5,0,1) }
@@ -134,6 +151,17 @@ h4 {
 			font-size: 13px;
 			line-height: 16px;
 		}
+	}
+	.helper {
+		span {
+			display: block;
+			width: $grid - 2;
+			margin: 2px auto;
+			text-align: center;
+			overflow: hidden;
+			font-size: 16px;
+			background: transparent;
+		}		
 	}
 }
 
