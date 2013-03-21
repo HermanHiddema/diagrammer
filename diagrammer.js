@@ -143,7 +143,7 @@ function draw() {
 	if (edges.south) {
 		lines.push(hedge);
 	}
-	$('#output').text(lines.join("\n"));
+	$('#output').html(lines.join("<br/>"));
 }
 
 function resized() {
