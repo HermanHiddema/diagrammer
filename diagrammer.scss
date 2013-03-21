@@ -2,6 +2,29 @@
 
 $grid: 23px;
 
+.help {
+	display: none;
+	border-color: #ccc;
+	border-width: 0 0 1px 0;
+	border-style: solid;
+	padding: 3px;
+}
+
+.showhelp {
+	border-color: #ccc;
+	border-width: 0 1px 1px 1px;
+	border-radius: 0 0 5px 5px;
+	border-style: solid;
+	border-top: 1px solid white;
+	padding: 3px;
+	text-align: center;
+	margin: -1px auto;
+	width: 100px;
+}
+
+.page {
+}
+
 @mixin sprite($s, $x, $y) {
 	$bgx: -($s - 1);
 	$bgy: -(3 * $y + $x - 3);

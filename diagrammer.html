@@ -6,83 +6,101 @@
 	<link rel="stylesheet" href="diagrammer.css" />
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="jquery.ui.touch-punch.js"></script>
 	<script type="text/javascript" src="diagrammer.js"></script>
 </head>
 <body>
-	<h2>Diagram Builder</h2>
-	<div class="column">
-		<div class="board">
-			<div class="grid">
-				<div class="data">
-					<table></table>
-				</div>
-				<div class="viewport">
-				</div>
-				<div class="overlay">
-				</div>
-			</div>
-		</div>
+	<div class="help">
+		Some tips:
+		<ul>
+			<li> You can drag any corner or edge of the board to resize the view port, thus creating partial board diagrams.</li>
+			<li> Clicking the stone with 1 on it on the far right of the toolbar changes the starting color.</li>
+			<li> Move numbers move up automatically (but can be set manually). Right-click the last move to undo it.</li>
+			<li> When the tool is the black stone, right click makes white stones, and vice-versa.</li>
+		</ul>
+
+		Also, if you want to try a different size board, add #WxH after the url (e.g. http://hiddema.nl/diagrammer/#9x9 for 9x9) 
 	</div>
-	<div class="column">
-		<div class="tools">
-			<div tool="black"    class="black stone tool active"></div>
-			<div tool="white"    class="white stone tool"></div>
-			<div tool="triangle" class="marker tool triangle"></div>
-			<div tool="circle"   class="marker tool circle"></div>
-			<div tool="square"   class="marker tool square"></div>
-			<div tool="cross"    class="marker tool cross"></div>
-			<div tool="greyed"   class="marker tool greyed"></div>
-			<div tool="label"    class="label tool">
-				<label for"label">Label:</label>
-				<select id="label" name="label">
-					<option>a</option>
-					<option>b</option>
-					<option>c</option>
-					<option>d</option>
-					<option>e</option>
-					<option>f</option>
-					<option>g</option>
-					<option>h</option>
-					<option>i</option>
-					<option>j</option>
-					<option>k</option>
-					<option>l</option>
-					<option>m</option>
-					<option>n</option>
-					<option>o</option>
-					<option>p</option>
-					<option>q</option>
-					<option>r</option>
-					<option>s</option>
-					<option>t</option>
-					<option>u</option>
-					<option>v</option>
-					<option>w</option>
-					<option>x</option>
-					<option>y</option>
-					<option>z</option>
-				</select>
+	<div class="showhelp">
+		Show Help
+	</div>
+
+	<div class="page">
+		<h2>Diagram Builder</h2>
+		<div class="column">
+			<div class="board">
+				<div class="grid">
+					<div class="data">
+						<table></table>
+					</div>
+					<div class="viewport">
+					</div>
+					<div class="overlay">
+					</div>
+				</div>
 			</div>
-			<div tool="move"     class="move tool">
-				<label for"move">Move:</label>
-				<select id="move" name="move">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="0">10</option>
-				</select>
-			</div>
-			<div class="helper black"><span>1</span></div>
 		</div>
-		<h4>Output</h4>
-		<div class="output" >
-			<div id="output">bla</div>
+		<div class="column">
+			<div class="tools">
+				<div tool="black"    class="black stone tool active"></div>
+				<div tool="white"    class="white stone tool"></div>
+				<div tool="triangle" class="marker tool triangle"></div>
+				<div tool="circle"   class="marker tool circle"></div>
+				<div tool="square"   class="marker tool square"></div>
+				<div tool="cross"    class="marker tool cross"></div>
+				<div tool="greyed"   class="marker tool greyed"></div>
+				<div tool="label"    class="label tool">
+					<label for"label">Label:</label>
+					<select id="label" name="label">
+						<option>a</option>
+						<option>b</option>
+						<option>c</option>
+						<option>d</option>
+						<option>e</option>
+						<option>f</option>
+						<option>g</option>
+						<option>h</option>
+						<option>i</option>
+						<option>j</option>
+						<option>k</option>
+						<option>l</option>
+						<option>m</option>
+						<option>n</option>
+						<option>o</option>
+						<option>p</option>
+						<option>q</option>
+						<option>r</option>
+						<option>s</option>
+						<option>t</option>
+						<option>u</option>
+						<option>v</option>
+						<option>w</option>
+						<option>x</option>
+						<option>y</option>
+						<option>z</option>
+					</select>
+				</div>
+				<div tool="move"     class="move tool">
+					<label for"move">Move:</label>
+					<select id="move" name="move">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="0">10</option>
+					</select>
+				</div>
+				<div class="helper black"><span>1</span></div>
+			</div>
+			<h4>Output</h4>
+			<div class="output" >
+				<div id="output">bla</div>
+			</div>
 		</div>
 	</div>
 </body>

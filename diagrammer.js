@@ -303,7 +303,17 @@ $(document).on('click', '.helper', function(){
   	draw();
 });
 
-
+$(document).on('click', '.showhelp', function(){
+	help = $('.help')
+	if (!help.is(':visible')){
+		help.slideDown();
+		$('.showhelp').html('Hide Help')
+	}
+	else {
+		help.slideUp();
+		$('.showhelp').html('Show Help')
+	}
+});
 
 $(function() {
 	init();
