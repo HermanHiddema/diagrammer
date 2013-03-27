@@ -373,6 +373,11 @@ table {
     display: table;
     clear: both; }
 
+.main:after {
+  content: "";
+  display: table;
+  clear: both; }
+
 .data {
   position: absolute;
   overflow: hidden;
@@ -583,6 +588,14 @@ h4 {
   .caption input.caption {
     font-size: 15.33333px; }
 
+.bottom {
+  position: relative; }
+
+.follow {
+  position: absolute;
+  right: 0;
+  bottom: 0; }
+
 .board {
   font-size: 23px;
   background-color: #d99e62;
@@ -651,6 +664,7 @@ h4 {
     font-size: 16px;
     background: transparent; }
   .tools .close.button {
+    cursor: hand;
     color: red;
     position: absolute;
     right: 0;

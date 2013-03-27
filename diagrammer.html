@@ -18,14 +18,13 @@
 			<li>Clicking the stone with 1 on it on the far right of the toolbar changes the starting color.</li>
 			<li>When the tool is the black stone, right click makes white stones, and vice-versa.</li>
 			<li>You can drag any corner or edge of the board to resize the view port, thus creating partial board diagrams.</li>
-			<li>If you want to try a different size board, add #WxH after the url. Shortcuts: <a href="#9x9">9x9</a>, <a href="#13x13">13x13</a>, <a href="#19x19">19x19</a></li>
 		</ul>
 	</div>
 	<div class="showhelp">
 		Show Help
 	</div>
 	<div id="template">
-		<div class="tools">
+		<div class="tools bar">
 			<div data-tool="black"    class="black stone tool active"></div>
 			<div data-tool="white"    class="white stone tool"></div>
 			<div data-tool="triangle" class="marker tool triangle"></div>
@@ -37,7 +36,7 @@
 				<label for"label">Label:</label>
 				<select class="labels" name="label"></select>
 			</div>
-			<div tool="move"     class="move tool">
+			<div data-tool="move"     class="move tool">
 				<label for"move">Move:</label>
 				<select class="moves" name="move"></select>
 			</div>
@@ -45,25 +44,30 @@
 
 			<div class="close button">&times;</div>
 		</div>
-		<div class="column">
-			<div class="board">
-				<div class="grid">
-					<div class="data">
-						<table></table>
-					</div>
-					<div class="viewport">
-					</div>
-					<div class="overlay">
+		<div class="main">
+			<div class="column">
+				<div class="board">
+					<div class="grid">
+						<div class="data">
+							<table></table>
+						</div>
+						<div class="viewport">
+						</div>
+						<div class="overlay">
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="caption">
-				<input type="text" class="caption" name="caption" placeholder="diagram caption">
+			<div class="column">
+				<div class="output">
+					output
+				</div>
 			</div>
 		</div>
-		<div class="column">
-			<div class="output">
-				output
+		<div class="bottom bar">
+			<button class="follow">Create follow-up diagram</button>
+			<div class="caption">
+				<input type="text" class="caption" name="caption" placeholder="diagram caption">
 			</div>
 		</div>
 	</div>
@@ -71,7 +75,7 @@
 
 	</div>
 	<div id="meta">
-		Add a new diagram: <input type="text" id="width" value="19" size="2"> &times; <input type="text" id="height" value="19" size="2"> <input id="create" type="button" value="create!">
+		New empty diagram: <input type="text" id="width" value="19" size="2"> &times; <input type="text" id="height" value="19" size="2"> <input id="create" type="button" value="Create new diagram">
 	</div>
 </body>
 </html>

@@ -8,6 +8,8 @@ function create_diagram(width, height) {
 	diagram.data('width', width);
 	diagram.data('height', height);
 	diagram.data('tool', 'black');
+	diagram.data('oddcolor', 'black');
+	diagram.data('evencolor', 'white');
 
 	labels = diagram.find('select.labels');
 	for (var i = 97; i < 123; i++) {
@@ -100,6 +102,17 @@ function create_diagram(width, height) {
 
 	diagram.on('blur', 'input.caption', function(){
 		generate_output($(this).closest('.diagram'))
+	});
+
+	diagram.on('click', 'button.follow', function() {
+		newdiagram = $(this).closest('.diagram').clone(true);
+		newdiagram.find('.data tr td').each(function(){
+			clear($(this));
+		});
+		generate_output(newdiagram);
+		newdiagram.css('display', 'none');
+		$(this).closest('.diagram').after(newdiagram);
+		newdiagram.slideDown(1000);
 	});
 
 	grid = parseInt($('<div class="board"/>').css('font-size'));
@@ -227,6 +240,12 @@ function resized() {
 function clear(cell) {
 	$(cell).removeClass('triangle circle square cross greyed')
 	$(cell).html(''); // remove any previous label or move	
+	if ($(cell).hasClass('empty')) {
+		$(cell).data('char', $(cell).hasClass('hoshi')?',':'.');
+	}
+	else {
+		$(cell).data('char', $(cell).hasClass('black') ? 'X' : 'O');
+	}
 }
 
 /** 
@@ -234,7 +253,7 @@ function clear(cell) {
  */
 
 function black(cell) {
-	clear($(cell))
+	clear(cell);
 	if ($(cell).hasClass('empty')) { 
 		$(cell).removeClass('empty').addClass('black').data('char', 'X');
 	}
@@ -251,7 +270,7 @@ function black(cell) {
  */
 
 function white(cell) {
-	clear(cell)
+	clear(cell);
 	if ($(cell).hasClass('empty')) { 
 		$(cell).removeClass('empty').addClass('white').data('char', 'O');
 	}
@@ -265,16 +284,10 @@ function white(cell) {
 
 function marker(cell, mark) {
 	if ($(cell).hasClass(mark)) {
-		$(cell).removeClass(mark)
-		if ($(cell).hasClass('empty')) {
-			$(cell).data('char', $(cell).hasClass('hoshi')?',':'.');
-		}
-		else {
-			$(cell).data('char', $(cell).hasClass('black') ? 'X' : 'O');
-		}
+		clear(cell);
 	}
 	else {
-		clear(cell)
+		clear(cell);
 		$(cell).addClass(mark)
 		if ($(cell).hasClass('empty')) {
 			switch(mark) {
@@ -301,40 +314,51 @@ function label(cell) {
 		alert("You can only label empty points. For stones, use markers.")
 	}
 	else {
-		label = $(cell).closest('.diagram').find('.label').val();
-		clear(cell)
-		if ($(cell).data('char') == label) {
-			$(cell).data('char', $(cell).hasClass('hoshi') ? ',' : '.')
+		value = $(cell).closest('.diagram').find('.labels').val();
+		if ($(cell).data('char') == value) {
+			clear(cell);
 		}
 		else {
-			$(cell).data('char', label);
-			$(cell).append($('<span class="label">'+label+'</span>'))
+			clear(cell);
+			$(cell).data('char', value);
+			$(cell).append($('<span class="label">'+value+'</span>'))
 		}
 	}
 }
+
 function move(cell) {
-	if (! $(cell).hasClass('empty')) {
+	if (! cell.hasClass('empty')) {
 		return;
 	}
-	sel = $('#move option:selected');
-	$(cell).removeClass('triangle circle square cross greyed')
-	$(cell).attr("data", sel.val());
-	$(cell).append($('<span class="move">'+(sel.val()==0?10:sel.val())+'</span>'));
-	$(cell).removeClass('black white empty').addClass('move ' + (sel.val()%2?oddcolor:evencolor));
-	$(sel).prop('selected', false).next().prop('selected', true);
+	sel = cell.closest('.diagram').find('.moves option:selected');
+	clear(cell)
+	cell.data('char', sel.val());
+	cell.append($('<span class="move">'+(sel.val()==0?10:sel.val())+'</span>'));
+
+	cell.removeClass('empty').addClass('move ' + (sel.val()%2 ? cell.closest('.diagram').data('oddcolor'):cell.closest('.diagram').data('evencolor')));
+	sel.prop('selected', false).next().prop('selected', true);
+}
+
+function unmove(cell) {
+	if (cell.hasClass('move')) {
+		cell.removeClass('black white').addClass('empty');
+		clear(cell);
+		sel = cell.closest('.diagram').find('.moves option:selected');
+		sel.prop('selected', false).prev().prop('selected', true);
+	}
 }
 
 function switchcolor(diagram) {
 	picker = diagram.find('.helper')
-	if ($(picker).hasClass('black')) {
-		$(picker).addClass('white').removeClass('black');
-		oddcolor = 'white';
-		evencolor = 'black';
+	if (picker.hasClass('black')) {
+		picker.addClass('white').removeClass('black');
+		diagram.data('oddcolor', 'white');
+		diagram.data('evencolor', 'black');
 	}
 	else {
-		$(picker).addClass('black').removeClass('white');  		
-		oddcolor = 'black';
-		evencolor = 'white';
+		picker.addClass('black').removeClass('white');  		
+		diagram.data('oddcolor', 'black');
+		diagram.data('evencolor', 'white');
 	}
 	diagram.find('td.move').each(function() {
 		if ($(this).hasClass('black')) {

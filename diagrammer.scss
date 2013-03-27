@@ -48,9 +48,9 @@ $grid: 23px;
 
 .diagram {
 	&:after {
-  		content: "";
-  		display: table;
-  		clear: both;
+		content: "";
+		display: table;
+		clear: both;
 	}
 	border: 1px solid #ccc;
 	border-radius: $grid/2;
@@ -58,6 +58,14 @@ $grid: 23px;
 	padding: $grid/2;
 	float: left;
 	clear: left;
+}
+
+.main {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}	
 }
 
 .data {
@@ -154,6 +162,16 @@ h4 {
 
 }
 
+.bottom {
+	position: relative;
+}
+
+.follow {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
 .board {
 	font-size: $grid;
 	background-color: #d99e62;
@@ -226,6 +244,7 @@ h4 {
 		}		
 	}
 	.close.button {
+		cursor: hand;
 		color: red;
 		position: absolute;
 		right: 0;
