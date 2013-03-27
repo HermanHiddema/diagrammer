@@ -577,11 +577,9 @@ h4 {
   padding-left: 10px; }
 
 .output {
-  white-space: pre;
   font-family: monospace, serif;
-  font-size: 13.8px;
-  line-height: 15.33333px;
-  padding: 23px 69px 23px 23px; }
+  font-size: 13px;
+  resize: none; }
 
 .caption {
   font-size: 23px; }
@@ -639,6 +637,8 @@ h4 {
     .tools .tool.white, .tools .picker.white {
       background-position: 0px -253px;
       color: black; }
+    .tools .tool.hoshi, .tools .picker.hoshi {
+      background-position: -23px -115px; }
     .tools .tool.triangle, .tools .picker.triangle {
       background-position: -46px 0px; }
     .tools .tool.circle, .tools .picker.circle {

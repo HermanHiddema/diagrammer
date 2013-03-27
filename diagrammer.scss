@@ -146,12 +146,11 @@ $grid: 23px;
 h4 {
 	padding-left: 10px;
 }
+
 .output {
-	white-space: pre;
 	font-family: monospace, serif;
-	font-size: 3*$grid/5;
-	line-height: 2*$grid/3;
-	padding: $grid 3*$grid $grid $grid;
+	font-size: 13px;
+	resize: none;
 }
 
 .caption {
@@ -219,6 +218,7 @@ h4 {
 		}
 		&.black    { @include sprite(1,1,4); color: white; }
 		&.white    { @include sprite(1,2,4); color: black; }
+		&.hoshi    { @include sprite(2,5,1) }
 		&.triangle { @include sprite(3,0,1) }
 		&.circle   { @include sprite(4,0,1) }
 		&.square   { @include sprite(5,0,1) }

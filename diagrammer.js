@@ -42,7 +42,7 @@ function create_diagram(width, height) {
 			else if (row==0)   { cell.addClass('top'   ); }
 			else               { cell.addClass('middle'); }
 
-			if (hoshi(col, row, width-1, height-1)) {
+			if (is_hoshi(col, row, width-1, height-1)) {
 				cell.addClass('hoshi');
 				cell.data('char', ',');
 			}
@@ -56,12 +56,14 @@ function create_diagram(width, height) {
 	}
 	diagram.find('.data').html('').append(table)
 	diagram.find('div.caption').css('width', (width+1) + 'em').find('input.caption').css('width', '100%')
+	diagram.find('.output').attr('rows', height+3).attr('cols', 2*width+6).attr('wrap', 'off').attr('readonly','readonly').on('click', function(){$(this).select();});
 
 	diagram.on('click', 'td', function(){
 		tool = $(this).closest('.diagram').data('tool');
 		switch(tool) {
 			case 'black': black($(this)); break;
 			case 'white': white($(this)); break;
+			case 'hoshi': hoshi($(this)); break;
 			case 'circle':
 			case 'cross':
 			case 'triangle':
@@ -135,7 +137,7 @@ function create_diagram(width, height) {
 	x,y,width and height are all 0 based, so the upper left corner of 19x19 is 0,0 on a size 18,18 board
 */
 
-function hoshi(x, y, width, height) {
+function is_hoshi(x, y, width, height) {
 	if (width < 4 || height < 4) {
 		return false;
 	}
@@ -230,7 +232,7 @@ function generate_output(diagram) {
 	if (edges.south) {
 		lines.push(hedge);
 	}
-	diagram.find('.output').html(lines.join("<br/>"));
+	diagram.find('.output').text(lines.join("\n"));
 }
 
 function resized() {
@@ -279,6 +281,13 @@ function white(cell) {
 	}
 	else if ($(cell).hasClass('black')) {
 		$(cell).removeClass('black').addClass('empty').data('char', $(cell).hasClass('hoshi') ? ',' : '.');
+	}
+}
+
+function hoshi(cell) {
+	cell.toggleClass('hoshi');
+	if (cell.hasClass('empty')) {
+		cell.data('char', $(cell).hasClass('hoshi') ? ',' : '.');
 	}
 }
 
