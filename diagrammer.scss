@@ -204,7 +204,8 @@ h4 {
 .tools {
 	height: $grid+2;
 	position: relative;
-	.tool, .helper {
+	padding-right: 2*$grid/3;
+	.tool, .picker {
 		width: $grid;
 		height: $grid;
 		float: left;
@@ -232,7 +233,7 @@ h4 {
 			line-height: 16px;
 		}
 	}
-	.helper {
+	.picker {
 		span {
 			display: block;
 			width: $grid - 2;
@@ -247,9 +248,9 @@ h4 {
 		cursor: hand;
 		color: red;
 		position: absolute;
+		font-size: $grid;
 		right: 0;
 		top: 0;
-		font-size: $grid;
 		margin: (-$grid/2) (-$grid/2) 0 0;
 		padding: 0 3px;
 		border-style: solid;

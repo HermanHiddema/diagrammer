@@ -91,7 +91,7 @@ function create_diagram(width, height) {
 	  	$(this).addClass('active');
 	});
 
-	diagram.on('click', '.helper', function(){
+	diagram.on('click', '.picker', function(){
 		switchcolor($(this).closest('.diagram'))
 	  	generate_output($(this).closest('.diagram'));
 	});
@@ -193,7 +193,7 @@ function generate_output(diagram) {
 
 	lines = Array();
 
-	line = diagram.find('.helper').hasClass('black') ? '$$B' : '$$W'
+	line = diagram.find('.picker').hasClass('black') ? '$$B' : '$$W'
 	line += ' ' + diagram.find('input.caption').val();
 
 	lines.push(line);
@@ -349,7 +349,7 @@ function unmove(cell) {
 }
 
 function switchcolor(diagram) {
-	picker = diagram.find('.helper')
+	picker = diagram.find('.picker')
 	if (picker.hasClass('black')) {
 		picker.addClass('white').removeClass('black');
 		diagram.data('oddcolor', 'white');
