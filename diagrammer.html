@@ -24,9 +24,27 @@
 	<div class="showhelp">
 		Show Help
 	</div>
+	<div id="template">
+		<div class="tools">
+			<div data-tool="black"    class="black stone tool active"></div>
+			<div data-tool="white"    class="white stone tool"></div>
+			<div data-tool="triangle" class="marker tool triangle"></div>
+			<div data-tool="circle"   class="marker tool circle"></div>
+			<div data-tool="square"   class="marker tool square"></div>
+			<div data-tool="cross"    class="marker tool cross"></div>
+			<div data-tool="greyed"   class="marker tool greyed"></div>
+			<div data-tool="label"    class="label tool">
+				<label for"label">Label:</label>
+				<select class="labels" name="label"></select>
+			</div>
+			<div tool="move"     class="move tool">
+				<label for"move">Move:</label>
+				<select class="moves" name="move"></select>
+			</div>
+			<div class="helper black"><span>1</span></div>
 
-	<div class="page">
-		<h2>Diagram Builder</h2>
+			<div class="close button">&times;</div>
+		</div>
 		<div class="column">
 			<div class="board">
 				<div class="grid">
@@ -39,69 +57,21 @@
 					</div>
 				</div>
 			</div>
+			<div class="caption">
+				<input type="text" class="caption" name="caption" placeholder="diagram caption">
+			</div>
 		</div>
 		<div class="column">
-			<div class="tools">
-				<div tool="black"    class="black stone tool active"></div>
-				<div tool="white"    class="white stone tool"></div>
-				<div tool="triangle" class="marker tool triangle"></div>
-				<div tool="circle"   class="marker tool circle"></div>
-				<div tool="square"   class="marker tool square"></div>
-				<div tool="cross"    class="marker tool cross"></div>
-				<div tool="greyed"   class="marker tool greyed"></div>
-				<div tool="label"    class="label tool">
-					<label for"label">Label:</label>
-					<select id="label" name="label">
-						<option>a</option>
-						<option>b</option>
-						<option>c</option>
-						<option>d</option>
-						<option>e</option>
-						<option>f</option>
-						<option>g</option>
-						<option>h</option>
-						<option>i</option>
-						<option>j</option>
-						<option>k</option>
-						<option>l</option>
-						<option>m</option>
-						<option>n</option>
-						<option>o</option>
-						<option>p</option>
-						<option>q</option>
-						<option>r</option>
-						<option>s</option>
-						<option>t</option>
-						<option>u</option>
-						<option>v</option>
-						<option>w</option>
-						<option>x</option>
-						<option>y</option>
-						<option>z</option>
-					</select>
-				</div>
-				<div tool="move"     class="move tool">
-					<label for"move">Move:</label>
-					<select id="move" name="move">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="0">10</option>
-					</select>
-				</div>
-				<div class="helper black"><span>1</span></div>
-			</div>
-			<h4>Output</h4>
-			<div class="output" >
-				<div id="output">bla</div>
+			<div class="output">
+				output
 			</div>
 		</div>
+	</div>
+	<div id="diagrams">
+
+	</div>
+	<div id="meta">
+		Add a new diagram: <input type="text" id="width" value="19" size="2"> &times; <input type="text" id="height" value="19" size="2"> <input id="create" type="button" value="create!">
 	</div>
 </body>
 </html>

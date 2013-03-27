@@ -11,24 +11,53 @@ $grid: 23px;
 }
 
 .showhelp {
+	position: relative;
 	border-color: #ccc;
 	border-width: 0 1px 1px 1px;
 	border-radius: 0 0 5px 5px;
 	border-style: solid;
 	border-top: 1px solid white;
-	padding: 3px;
+	padding: 0 3px;
 	text-align: center;
-	margin: -1px auto;
+	height: $grid;
+	margin: -1px auto 0;
 	width: 100px;
+	z-index: 1000;
 }
 
-.page {
+#meta {
+	margin-left: $grid;
+	clear: left;
 }
+
+#width {
+	text-align: right;
+}
+
+#template {
+	display: none;
+}
+
+
 
 @mixin sprite($s, $x, $y) {
 	$bgx: -($s - 1);
 	$bgy: -(3 * $y + $x - 3);
 	background-position: ($bgx * $grid) ($bgy * $grid); 
+}
+
+.diagram {
+	&:after {
+  		content: "";
+  		display: table;
+  		clear: both;
+	}
+	border: 1px solid #ccc;
+	border-radius: $grid/2;
+	margin: $grid/2;
+	padding: $grid/2;
+	float: left;
+	clear: left;
 }
 
 .data {
@@ -109,12 +138,20 @@ $grid: 23px;
 h4 {
 	padding-left: 10px;
 }
-#output {
+.output {
 	white-space: pre;
 	font-family: monospace, serif;
 	font-size: 3*$grid/5;
 	line-height: 2*$grid/3;
-	padding: 0 100px 100px 10px;
+	padding: $grid 3*$grid $grid $grid;
+}
+
+.caption {
+	font-size: $grid;
+	input.caption {
+		font-size: 2*($grid/3)
+	}
+
 }
 
 .board {
@@ -140,6 +177,7 @@ h4 {
 			left: 0;
 			border-style: solid;
 			border-color: rgba(0,0,0,0.1);
+			border-width: 0;
 			pointer-events: none;
 		}
 	}
@@ -147,6 +185,7 @@ h4 {
 
 .tools {
 	height: $grid+2;
+	position: relative;
 	.tool, .helper {
 		width: $grid;
 		height: $grid;
@@ -185,6 +224,19 @@ h4 {
 			font-size: 16px;
 			background: transparent;
 		}		
+	}
+	.close.button {
+		color: red;
+		position: absolute;
+		right: 0;
+		top: 0;
+		font-size: $grid;
+		margin: (-$grid/2) (-$grid/2) 0 0;
+		padding: 0 3px;
+		border-style: solid;
+		border-color: #ccc;
+		border-width: 0 0 1px 1px;
+		border-radius: 0 0 0 $grid/2;
 	}
 }
 

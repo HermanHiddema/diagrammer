@@ -338,15 +338,40 @@ table {
   padding: 3px; }
 
 .showhelp {
+  position: relative;
   border-color: #ccc;
   border-width: 0 1px 1px 1px;
   border-radius: 0 0 5px 5px;
   border-style: solid;
   border-top: 1px solid white;
-  padding: 3px;
+  padding: 0 3px;
   text-align: center;
-  margin: -1px auto;
-  width: 100px; }
+  height: 23px;
+  margin: -1px auto 0;
+  width: 100px;
+  z-index: 1000; }
+
+#meta {
+  margin-left: 23px;
+  clear: left; }
+
+#width {
+  text-align: right; }
+
+#template {
+  display: none; }
+
+.diagram {
+  border: 1px solid #ccc;
+  border-radius: 11.5px;
+  margin: 11.5px;
+  padding: 11.5px;
+  float: left;
+  clear: left; }
+  .diagram:after {
+    content: "";
+    display: table;
+    clear: both; }
 
 .data {
   position: absolute;
@@ -546,12 +571,17 @@ table {
 h4 {
   padding-left: 10px; }
 
-#output {
+.output {
   white-space: pre;
   font-family: monospace, serif;
   font-size: 13.8px;
   line-height: 15.33333px;
-  padding: 0 100px 100px 10px; }
+  padding: 23px 69px 23px 23px; }
+
+.caption {
+  font-size: 23px; }
+  .caption input.caption {
+    font-size: 15.33333px; }
 
 .board {
   font-size: 23px;
@@ -573,10 +603,12 @@ h4 {
       left: 0;
       border-style: solid;
       border-color: rgba(0, 0, 0, 0.1);
+      border-width: 0;
       pointer-events: none; }
 
 .tools {
-  height: 25px; }
+  height: 25px;
+  position: relative; }
   .tools .tool, .tools .helper {
     width: 23px;
     height: 23px;
@@ -618,6 +650,18 @@ h4 {
     overflow: hidden;
     font-size: 16px;
     background: transparent; }
+  .tools .close.button {
+    color: red;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 23px;
+    margin: -11.5px -11.5px 0 0;
+    padding: 0 3px;
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 0 0 1px 1px;
+    border-radius: 0 0 0 11.5px; }
 
 .ui-resizable {
   position: relative; }

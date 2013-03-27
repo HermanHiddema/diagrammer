@@ -1,55 +1,120 @@
-var board = {
-	width: 19,
-	height: 19
-};
+/**
+ * Create a new diagram, with toolbars, output, viewport, etc.
+ * and bind all the relevant code to mouse clicks.
+ */
 
-var tool = 'black';
-var oddcolor = 'black';
-var evencolor = 'white';
+function create_diagram(width, height) {
+	diagram = $('<div class="diagram"/>').html($('#template').html());
+	diagram.data('width', width);
+	diagram.data('height', height);
+	diagram.data('tool', 'black');
 
-function init() {
-	var param = document.URL.split('#')[1];
-	if (param) {
-		params = param.split('x')
-		board.width = Math.max(2, Math.min(50, parseInt(params[0])));
-		board.height = Math.max(2, Math.min(50, parseInt(params[1])));
+	labels = diagram.find('select.labels');
+	for (var i = 97; i < 123; i++) {
+		$('<option>'+String.fromCharCode(i)+'</option>').appendTo(labels);
 	}
 
-	$('.viewport, .grid, .board, .overlay').css({
+	moves = diagram.find('select.moves');
+	for (var i = 1; i < 11; i++) {
+		$('<option>'+i+'</option>').attr('value', i == 10 ? 0 : i).appendTo(moves);
+	}
+
+	diagram.find('.viewport, .grid, .board, .overlay').css({
 		'left':0,
 		'top':0,
-		'width':'' + (board.width) + 'em',
-		'height': '' + (board.height) + 'em'
+		'width': width + 'em',
+		'height': height + 'em'
 	});
-	$('.data').html('')
 
 	table = $('<table />')
-	for (row = 0; row < board.height; row++) {
-		table_row = $('<tr></tr>');
-		for (col = 0; col < board.width; col++) {
-			cell = $('<td></td>').addClass('empty');
+	for (row = 0; row < height; row++) {
+		table_row = $('<tr />');
+		for (col = 0; col < width; col++) {
+			cell = $('<td />').addClass('empty');
 
-			if (col==board.width-1)  { cell.addClass('right' ); }
-			else if (col==0)         { cell.addClass('left'  ); }
-			else                     { cell.addClass('center'); }
+			if (col==width-1)  { cell.addClass('right' ); }
+			else if (col==0)   { cell.addClass('left'  ); }
+			else               { cell.addClass('center'); }
 
-			if (row==board.height-1) { cell.addClass('bottom'); }
-			else if (row==0)         { cell.addClass('top'   ); }
-			else                     { cell.addClass('middle'); }
+			if (row==height-1) { cell.addClass('bottom'); }
+			else if (row==0)   { cell.addClass('top'   ); }
+			else               { cell.addClass('middle'); }
 
-			if (hoshi(col, row, board.width-1, board.height-1)) {
+			if (hoshi(col, row, width-1, height-1)) {
 				cell.addClass('hoshi');
-				cell.attr('data', ',');
+				cell.data('char', ',');
 			}
 			else {
 				cell.addClass('normal')
-				cell.attr('data', '.');				
+				cell.data('char', '.');				
 			}
 			table_row.append(cell)
 		}
 		table.append(table_row)
 	}
-	$('.data').append(table)
+	diagram.find('.data').html('').append(table)
+	diagram.find('div.caption').css('width', (width+1) + 'em').find('input.caption').css('width', '100%')
+
+	diagram.on('click', 'td', function(){
+		tool = $(this).closest('.diagram').data('tool');
+		switch(tool) {
+			case 'black': black($(this)); break;
+			case 'white': white($(this)); break;
+			case 'circle':
+			case 'cross':
+			case 'triangle':
+			case 'square': 
+			case 'greyed': marker($(this), tool); break;
+			case 'label': label($(this)); break;
+			case 'move': move($(this)); break;
+		}
+		generate_output($(this).closest('.diagram'));
+	});
+
+	diagram.on('contextmenu', 'td', function(){
+		tool = $(this).closest('.diagram').data('tool');
+		switch(tool) {
+			case 'black': white($(this)); break;
+			case 'white': black($(this)); break;
+			case 'move': unmove($(this)); break;
+			default: return true;
+		}
+		generate_output($(this).closest('.diagram'));
+		return false;
+	});
+
+	diagram.on('click', '.tool', function(){
+		$(this).closest('.tools').find('.tool.active').removeClass('active');
+	  	$(this).closest('.diagram').data('tool', $(this).data('tool'))
+	  	$(this).addClass('active');
+	});
+
+	diagram.on('click', '.helper', function(){
+		switchcolor($(this).closest('.diagram'))
+	  	generate_output($(this).closest('.diagram'));
+	});
+
+	diagram.on('click', '.close.button', function(){
+	  	$(this).closest('.diagram').slideUp(500, function() {$(this).remove();});
+	});
+
+	diagram.on('blur', 'input.caption', function(){
+		generate_output($(this).closest('.diagram'))
+	});
+
+	grid = parseInt($('<div class="board"/>').css('font-size'));
+
+	diagram.find('.viewport').resizable({
+		grid:[grid,grid],
+		handles: 'n, e, s, w, ne, se, sw, nw',
+		containment: 'parent',
+		resize: resized
+	});
+	diagram.find('.ui-resizable-se').removeClass('ui-icon ui-icon-gripsmall-diagonal-se');
+
+	generate_output(diagram);
+
+	return diagram;
 }
 
 /**
@@ -81,46 +146,55 @@ function hoshi(x, y, width, height) {
 	return h && w;
 }
 
-function draw() {
+/**
+ * Generate the SLtext output
+ */
+
+function generate_output(diagram) {
+	grid = parseInt($('<div class="board"/>').css('font-size'));
 	viewport = {
-		width:  Math.round(parseInt($('.viewport').css('width'))/23),
-		height: Math.round(parseInt($('.viewport').css('height'))/23),
-		left:   Math.round(parseInt($('.viewport').css('left'))/23),
-		top:    Math.round(parseInt($('.viewport').css('top'))/23),
+		width:  Math.round(parseInt(diagram.find('.viewport').css('width'))/grid),
+		height: Math.round(parseInt(diagram.find('.viewport').css('height'))/grid),
+		left:   Math.round(parseInt(diagram.find('.viewport').css('left'))/grid),
+		top:    Math.round(parseInt(diagram.find('.viewport').css('top'))/grid),
 	}
-	viewport.right = board.width - viewport.width - viewport.left,
-	viewport.bottom = board.height - viewport.height - viewport.top,
+	viewport.right = diagram.data('width') - viewport.width - viewport.left,
+	viewport.bottom = diagram.data('height') - viewport.height - viewport.top,
 
 	edges = {
-		north: parseInt($('.viewport').css('top') ) == 0,
-		west:  parseInt($('.viewport').css('left')) == 0,
-		east:  parseInt($('.viewport').css('left')) + parseInt($('.viewport').css('width') ) == parseInt($('.grid').css('width')),
-		south: parseInt($('.viewport').css('top') ) + parseInt($('.viewport').css('height')) == parseInt($('.grid').css('height'))
+		north: parseInt(diagram.find('.viewport').css('top') ) == 0,
+		west:  parseInt(diagram.find('.viewport').css('left')) == 0,
+		east:  parseInt(diagram.find('.viewport').css('left')) + parseInt(diagram.find('.viewport').css('width') ) == parseInt(diagram.find('.grid').css('width')),
+		south: parseInt(diagram.find('.viewport').css('top') ) + parseInt(diagram.find('.viewport').css('height')) == parseInt(diagram.find('.grid').css('height'))
 	}
 
 	// make overlay match viewport
 	$('.overlay').css( {
-		'width' : '' + viewport.width  + 'em',
-		'height': '' + viewport.height + 'em',
-		'border-left-width'  : '' + viewport.left   + 'em',
-		'border-right-width' : '' + viewport.right  + 'em',
-		'border-top-width'   : '' + viewport.top    + 'em',
-		'border-bottom-width': '' + viewport.bottom + 'em',
+		'width' : viewport.width  + 'em',
+		'height': viewport.height + 'em',
+		'border-left-width'  : viewport.left   + 'em',
+		'border-right-width' : viewport.right  + 'em',
+		'border-top-width'   : viewport.top    + 'em',
+		'border-bottom-width': viewport.bottom + 'em',
 	});
 
 	lines = Array();
-	lines.push(oddcolor == 'black' ? '$$B' : '$$W');
-	hedge = Array(viewport.width).join('--') + '-'
+
+	line = diagram.find('.helper').hasClass('black') ? '$$B' : '$$W'
+	line += ' ' + diagram.find('input.caption').val();
+
+	lines.push(line);
 
 	if (edges.north || edges.south) {
+		hedge = Array(viewport.width).join('--') + '-'
 		if (edges.west) {
 			hedge = '+-' + hedge;
 		}
 		if (edges.east) {
 			hedge += '-+';					
 		}
+		hedge = '$$ ' + hedge;
 	} 
-	hedge = '$$ ' + hedge;
 
 	if (edges.north) {
 		lines.push(hedge);
@@ -132,8 +206,8 @@ function draw() {
 			line += ' |'; 
 		}
 		for (c = viewport.left; c < viewport.width + viewport.left; c++) {
-			cell = $('.data table')[0].rows[r].cells[c];
-			line += ' ' + $(cell).attr('data');
+			cell = diagram.find('.data table')[0].rows[r].cells[c];
+			line += ' ' + $(cell).data('char');
 		}
 		if (edges.east) {
 			line += ' |';
@@ -143,36 +217,49 @@ function draw() {
 	if (edges.south) {
 		lines.push(hedge);
 	}
-	$('#output').html(lines.join("<br/>"));
+	diagram.find('.output').html(lines.join("<br/>"));
 }
 
 function resized() {
-	draw();
+	generate_output($(this).closest('.diagram'));
 }
 
-function stone(cell, color) {
-	if (color == 'white') {
-		other = 'black';
-	}
-	else {
-		other = 'white'
-	}
+function clear(cell) {
 	$(cell).removeClass('triangle circle square cross greyed')
-	$(cell).html(''); // remove any previous label
+	$(cell).html(''); // remove any previous label or move	
+}
+
+/** 
+ * cycles empty -> black -> white -> empty
+ */
+
+function black(cell) {
+	clear($(cell))
 	if ($(cell).hasClass('empty')) { 
-		$(cell).removeClass('empty'); 
-		$(cell).addClass(color);
-		$(cell).attr('data', color == 'black' ? 'X' : 'O');
+		$(cell).removeClass('empty').addClass('black').data('char', 'X');
 	}
-	else if ($(cell).hasClass(color)) {
-		$(cell).removeClass(color);
-		$(cell).addClass(other);
-		$(cell).attr('data', other == 'black' ? 'X' : 'O');
+	else if ($(cell).hasClass('black')) {
+		$(cell).removeClass('black').addClass('white').data('char', 'O');
 	}
-	else if ($(cell).hasClass(other)) {
-		$(cell).removeClass(other);
-		$(cell).addClass('empty') 
-		$(cell).attr('data', $(cell).hasClass('hoshi')? ',' : '.');
+	else if ($(cell).hasClass('white')) {
+		$(cell).removeClass('white').addClass('empty').data('char', $(cell).hasClass('hoshi') ? ',' : '.');
+	}
+}
+
+/** 
+ * cycles empty -> white -> black -> empty
+ */
+
+function white(cell) {
+	clear(cell)
+	if ($(cell).hasClass('empty')) { 
+		$(cell).removeClass('empty').addClass('white').data('char', 'O');
+	}
+	else if ($(cell).hasClass('white')) {
+		$(cell).removeClass('white').addClass('black').data('char', 'X');
+	}
+	else if ($(cell).hasClass('black')) {
+		$(cell).removeClass('black').addClass('empty').data('char', $(cell).hasClass('hoshi') ? ',' : '.');
 	}
 }
 
@@ -180,48 +267,47 @@ function marker(cell, mark) {
 	if ($(cell).hasClass(mark)) {
 		$(cell).removeClass(mark)
 		if ($(cell).hasClass('empty')) {
-			$(cell).attr("data", $(cell).hasClass('hoshi')?',':'.');
+			$(cell).data('char', $(cell).hasClass('hoshi')?',':'.');
 		}
 		else {
-			$(cell).attr("data", $(cell).hasClass('black') ? 'X' : 'O');
+			$(cell).data('char', $(cell).hasClass('black') ? 'X' : 'O');
 		}
 	}
 	else {
-		$(cell).html(''); // remove any previous label
-		$(cell).removeClass('triangle circle square cross greyed move')
+		clear(cell)
 		$(cell).addClass(mark)
 		if ($(cell).hasClass('empty')) {
-			switch(tool) {
-				case 'circle':   $(cell).attr("data", "C"); break; 
-				case 'cross':    $(cell).attr("data", "M"); break;
-				case 'triangle': $(cell).attr("data", "T"); break;
-				case 'square':   $(cell).attr("data", "S"); break;
-				case 'greyed':   $(cell).attr("data", "?"); break;
+			switch(mark) {
+				case 'circle':   $(cell).data('char', "C"); break; 
+				case 'cross':    $(cell).data('char', "M"); break;
+				case 'triangle': $(cell).data('char', "T"); break;
+				case 'square':   $(cell).data('char', "S"); break;
+				case 'greyed':   $(cell).data('char', "?"); break;
 			}
 		}
 		else {
-			switch(tool) {
-				case 'circle':   $(cell).attr("data", $(cell).hasClass('black') ? 'B' : 'W'); break; 
-				case 'cross':    $(cell).attr("data", $(cell).hasClass('black') ? 'Z' : 'P'); break;
-				case 'triangle': $(cell).attr("data", $(cell).hasClass('black') ? 'Y' : 'Q'); break;
-				case 'square':   $(cell).attr("data", $(cell).hasClass('black') ? '#' : '@'); break;
+			switch(mark) {
+				case 'circle':   $(cell).data('char', $(cell).hasClass('black') ? 'B' : 'W'); break; 
+				case 'cross':    $(cell).data('char', $(cell).hasClass('black') ? 'Z' : 'P'); break;
+				case 'triangle': $(cell).data('char', $(cell).hasClass('black') ? 'Y' : 'Q'); break;
+				case 'square':   $(cell).data('char', $(cell).hasClass('black') ? '#' : '@'); break;
 			}
 		}
 	}
 }
 
-function label(cell, label) {
+function label(cell) {
 	if (!$(cell).hasClass('empty')) {
 		alert("You can only label empty points. For stones, use markers.")
 	}
 	else {
-		$(cell).html(''); // remove any previous label
-		$(cell).removeClass('triangle circle square cross greyed')
-		if ($(cell).attr("data") == label) {
-			$(cell).attr("data", $(cell).hasClass('hoshi')?',':'.')
+		label = $(cell).closest('.diagram').find('.label').val();
+		clear(cell)
+		if ($(cell).data('char') == label) {
+			$(cell).data('char', $(cell).hasClass('hoshi') ? ',' : '.')
 		}
 		else {
-			$(cell).attr("data", label);
+			$(cell).data('char', label);
 			$(cell).append($('<span class="label">'+label+'</span>'))
 		}
 	}
@@ -238,95 +324,46 @@ function move(cell) {
 	$(sel).prop('selected', false).next().prop('selected', true);
 }
 
-
-$(document).on('click', 'td', function(){
-	switch(tool) {
-		case 'black':
-		case 'white': stone($(this), tool); 
-			break;
-		case 'circle':
-		case 'cross':
-		case 'triangle':
-		case 'square': 
-		case 'greyed': marker($(this), tool);
-			break;
-		case 'label': label($(this), $('#label option:selected').val());
-			break;
-		case 'move': move($(this));
-			break;
+function switchcolor(diagram) {
+	picker = diagram.find('.helper')
+	if ($(picker).hasClass('black')) {
+		$(picker).addClass('white').removeClass('black');
+		oddcolor = 'white';
+		evencolor = 'black';
 	}
-	draw();
-});
-
-$(document).on('contextmenu', 'td', function(){
-	if (tool == 'black' || tool == 'white') {
-		stone($(this), tool == 'black' ? 'white' : 'black')
-		draw();
-		return false;
+	else {
+		$(picker).addClass('black').removeClass('white');  		
+		oddcolor = 'black';
+		evencolor = 'white';
 	}
-	if (tool == 'move' && $(this).find('span').length > 0) {
-		$(this).removeClass('black white empty move').addClass('empty');
-		$(this).html('');
-		$(this).attr("data", $(cell).hasClass('hoshi')?',':'.')
-		sel = $('#move option:selected');
-		$(sel).prop('selected', false).prev().prop('selected', true);
-		draw();
-		return false;
-	}
-});
+	diagram.find('td.move').each(function() {
+		if ($(this).hasClass('black')) {
+			$(this).addClass('white').removeClass('black');
+		}
+		else {
+			$(this).addClass('black').removeClass('white');  			
+		}
+	});
+}
 
-$(document).on('click', '.tool', function(){
-	$('.tool.active').removeClass('active');
-  	$(this).addClass('active');
-  	tool = $(this).attr('tool')
-});
+/**
+ * When the create button is clicked, add a new diagram to the page with the specified width/height
+ */
 
-$(document).on('click', '.helper', function(){
-  	if ($(this).hasClass('black')) {
-  		$(this).addClass('white').removeClass('black');
-  		oddcolor = 'white';
-  		evencolor = 'black';
-  	}
-  	else {
-  		$(this).addClass('black').removeClass('white');  		
-  		oddcolor = 'black';
-  		evencolor = 'white';
-  	}
-  	$('td.move').each(function() {
-  		if ($(this).hasClass('black')) {
-  			$(this).addClass('white').removeClass('black');
-  		}
-  		else {
-  			$(this).addClass('black').removeClass('white');  			
-  		}
-  	});
-  	draw();
-});
+$(document).on('click', '#create', function(){
+	width = Math.max(2, Math.min(50, parseInt($('#width').val())));
+	height = Math.max(2, Math.min(50, parseInt($('#height').val())));
+	diagram = create_diagram(width, height)
+	diagram.css('display', 'none').appendTo($('#diagrams')).slideDown(1000);
+})
 
 $(document).on('click', '.showhelp', function(){
-	help = $('.help')
-	if (!help.is(':visible')){
-		help.slideDown();
+	if (!$('.help').is(':visible')){
+		$('.help').slideDown();
 		$('.showhelp').html('Hide Help')
 	}
 	else {
-		help.slideUp();
+		$('.help').slideUp();
 		$('.showhelp').html('Show Help')
 	}
-});
-
-$(function() {
-	init();
-	$('.viewport').resizable({
-		grid:[23,23],
-		handles: 'n, e, s, w, ne, se, sw, nw',
-		containment: 'parent',
-		resize: resized
-	});
-	$('.ui-resizable-se').removeClass('ui-icon ui-icon-gripsmall-diagonal-se');
-	$(window).bind('hashchange',function(){
-		init();
-		draw();
-	});
-	draw();
 });
