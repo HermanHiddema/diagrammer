@@ -188,7 +188,7 @@ function generate_output(diagram) {
 	}
 
 	// make overlay match viewport
-	$('.overlay').css( {
+	$(diagram).find('.overlay').css( {
 		'width' : viewport.width  + 'em',
 		'height': viewport.height + 'em',
 		'border-left-width'  : viewport.left   + 'em',
