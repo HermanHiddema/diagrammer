@@ -291,6 +291,7 @@ function white(cell) {
 
 function hoshi(cell) {
 	cell.toggleClass('hoshi');
+	cell.toggleClass('normal');
 	if (cell.hasClass('empty')) {
 		cell.data('char', $(cell).hasClass('hoshi') ? ',' : '.');
 	}
