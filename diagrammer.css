@@ -649,13 +649,15 @@ h4 {
       background-position: -115px 0px; }
     .tools .tool.greyed, .tools .picker.greyed {
       background-position: -138px 0px; }
-    .tools .tool.label, .tools .tool.move, .tools .picker.label, .tools .picker.move {
+    .tools .tool.label, .tools .tool.move, .tools .tool.coords, .tools .picker.label, .tools .picker.move, .tools .picker.coords {
       width: auto;
       padding: 0 2px;
       background-color: #f2b06d;
       background-image: none;
       font-size: 13px;
-      line-height: 16px; }
+      line-height: 23px; }
+      .tools .tool.label input, .tools .tool.label select, .tools .tool.move input, .tools .tool.move select, .tools .tool.coords input, .tools .tool.coords select, .tools .picker.label input, .tools .picker.label select, .tools .picker.move input, .tools .picker.move select, .tools .picker.coords input, .tools .picker.coords select {
+        height: 23px; }
   .tools .picker span {
     display: block;
     width: 21px;

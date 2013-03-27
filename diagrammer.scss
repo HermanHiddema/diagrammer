@@ -224,13 +224,16 @@ h4 {
 		&.square   { @include sprite(5,0,1) }
 		&.cross    { @include sprite(6,0,1) }
 		&.greyed   { @include sprite(7,0,1) }
-		&.label,&.move {
+		&.label, &.move, &.coords {
 			width: auto;
 			padding: 0 2px;
 			background-color: #f2b06d;
 			background-image: none;
 			font-size: 13px;
-			line-height: 16px;
+			line-height: $grid;
+			input, select {
+				height: $grid;
+			}
 		}
 	}
 	.picker {

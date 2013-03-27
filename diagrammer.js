@@ -88,6 +88,10 @@ function create_diagram(width, height) {
 	});
 
 	diagram.on('click', '.tool', function(){
+		if ($(this).hasClass('coords')) {
+			generate_output($(this).closest('.diagram'))
+			return
+		}
 		$(this).closest('.tools').find('.tool.active').removeClass('active');
 	  	$(this).closest('.diagram').data('tool', $(this).data('tool'))
 	  	$(this).addClass('active');
@@ -195,7 +199,8 @@ function generate_output(diagram) {
 
 	lines = Array();
 
-	line = diagram.find('.picker').hasClass('black') ? '$$B' : '$$W'
+	line = diagram.find('.picker').hasClass('black') ? '$$B' : '$$W';
+	line += diagram.find('input.coords').is(':checked') ? 'c' : '';
 	line += ' ' + diagram.find('input.caption').val();
 
 	lines.push(line);
