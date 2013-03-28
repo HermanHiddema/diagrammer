@@ -17,5 +17,3 @@ help
 * Clicking the stone with 1 on it on the far right of the toolbar changes the starting color.
 * When the tool is the black stone, right click makes white stones, and vice-versa.
 * You can drag any corner or edge of the board to resize the view port, thus creating partial board diagrams.
-* If you want to try a different size board, add #WxH after the url. Shortcuts: [9x9](http://hiddema.nl/diagrammer/#9x9), [13x13](http://hiddema.nl/diagrammer/#13x13), [19x19](http://hiddema.nl/diagrammer/#19x19)
-
