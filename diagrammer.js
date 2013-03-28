@@ -145,18 +145,18 @@ function is_hoshi(x, y, width, height) {
 	if (width < 4 || height < 4) {
 		return false;
 	}
-	if (2*x == width && 2*y == height) {
+	if (2*x == width && 2*y == height && width == height) {
 		return true // always tengen if available (both sides odd length)
 	}
 	w = false;
 	h = false;
-	if (width > 10 && (x == 3 || width-x == 3 || width == 2*x)) {
+	if ((width > 10 && (x == 3 || width-x == 3)) || (width > 13 && width == 2*x)) {
 		w = true;
 	}
 	if (width > 6 && width < 11 && (x == 2 || width-x == 2 )) {
 		w = true;
 	}
-	if (height > 10 && (y == 3 || height-y == 3 || height == 2*y)) {
+	if ((height > 10 && (y == 3 || height-y == 3)) || (height > 13 && height == 2*y)) {
 		h = true;
 	}
 	else if (height > 6 && height < 11 && (y == 2 || height-y == 2)) {
