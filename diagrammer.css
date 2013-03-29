@@ -621,7 +621,8 @@ h4 {
   height: 25px;
   position: relative;
   padding-right: 15.33333px; }
-  .tools .tool, .tools .picker {
+  .tools .tool {
+    position: relative;
     width: 23px;
     height: 23px;
     float: left;
@@ -629,45 +630,74 @@ h4 {
     border-color: #f2b06d;
     border-style: solid;
     background-image: url(diagrammer.png); }
-    .tools .tool.active, .tools .picker.active {
+    .tools .tool.active {
       border-color: red; }
-    .tools .tool.black, .tools .picker.black {
+    .tools .tool.black {
       background-position: 0px -230px;
       color: white; }
-    .tools .tool.white, .tools .picker.white {
+    .tools .tool.white {
       background-position: 0px -253px;
       color: black; }
-    .tools .tool.hoshi, .tools .picker.hoshi {
+    .tools .tool.hoshi {
       background-position: -23px -115px; }
-    .tools .tool.triangle, .tools .picker.triangle {
+    .tools .tool.triangle {
       background-position: -46px 0px; }
-    .tools .tool.circle, .tools .picker.circle {
+    .tools .tool.circle {
       background-position: -69px 0px; }
-    .tools .tool.square, .tools .picker.square {
+    .tools .tool.square {
       background-position: -92px 0px; }
-    .tools .tool.cross, .tools .picker.cross {
+    .tools .tool.cross {
       background-position: -115px 0px; }
-    .tools .tool.greyed, .tools .picker.greyed {
+    .tools .tool.greyed {
       background-position: -138px 0px; }
-    .tools .tool.label, .tools .tool.move, .tools .tool.coords, .tools .picker.label, .tools .picker.move, .tools .picker.coords {
-      width: auto;
-      padding: 0 2px;
+    .tools .tool.label {
+      background-position: 0px -115px; }
+      .tools .tool.label span {
+        background-color: #f2b06d; }
+    .tools .tool.move {
+      background-position: 0px -230px; }
+      .tools .tool.move span {
+        color: white;
+        background-color: transparent; }
+    .tools .tool.coords {
+      background-position: -9.5px -124.2px; }
+      .tools .tool.coords input {
+        margin: 4px 0 0 4px; }
+    .tools .tool.label span, .tools .tool.move span {
+      display: block;
+      width: 17.25px;
+      height: 17.25px;
+      text-align: center;
+      overflow: hidden;
+      margin: 2.875px;
+      font-size: 16px;
+      line-height: 17.25px; }
+    .tools .tool .settings {
+      position: absolute;
+      display: none;
+      top: 23px;
+      left: 0;
+      z-index: 1000;
+      padding: 5px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
       background-color: #f2b06d;
       background-image: none;
       font-size: 13px;
       line-height: 23px; }
-      .tools .tool.label input, .tools .tool.label select, .tools .tool.move input, .tools .tool.move select, .tools .tool.coords input, .tools .tool.coords select, .tools .picker.label input, .tools .picker.label select, .tools .picker.move input, .tools .picker.move select, .tools .picker.coords input, .tools .picker.coords select {
-        height: 23px; }
-  .tools .picker span {
-    display: block;
-    width: 21px;
-    margin: 2px auto;
-    text-align: center;
-    overflow: hidden;
-    font-size: 16px;
-    background: transparent; }
+      .tools .tool .settings.move {
+        width: 180px; }
+      .tools .tool .settings .label {
+        width: 70px;
+        position: relative; }
+        .tools .tool .settings .label span {
+          cursor: pointer;
+          display: block;
+          float: left;
+          text-align: center;
+          font-size: 16px;
+          background-color: #f2b06d; }
   .tools .close.button {
-    cursor: hand;
+    cursor: pointer;
     color: red;
     position: absolute;
     font-size: 23px;

@@ -10,11 +10,19 @@ function create_diagram(width, height) {
 	diagram.data('tool', 'black');
 	diagram.data('oddcolor', 'black');
 	diagram.data('evencolor', 'white');
+	diagram.data('label', 'a');
 
-	labels = diagram.find('select.labels');
+	labels = diagram.find('.tool.label .labels');
 	for (var i = 97; i < 123; i++) {
-		$('<option>'+String.fromCharCode(i)+'</option>').appendTo(labels);
+		$('<div class="label"><span data-prev="'+String.fromCharCode(i-1)+'">'+String.fromCharCode(i)+'</span></div>').appendTo(labels).on('click', 'span', function(){
+			next_label_from($(this).closest('.diagram'), $(this).data('prev'));
+			$(this).closest('.settings').slideUp();
+		});
 	}
+	$('<div class="label"><span style="color:red">&times</span></div>').appendTo(labels).on('click', function(){
+		$(this).closest('.settings').slideUp();
+	});
+
 
 	moves = diagram.find('select.moves');
 	for (var i = 1; i < 11; i++) {
@@ -97,9 +105,18 @@ function create_diagram(width, height) {
 	  	$(this).addClass('active');
 	});
 
-	diagram.on('click', '.picker', function(){
+	diagram.on('contextmenu', '.tool', function() {
+		$(this).find('.settings').slideDown()
+		return false;
+	}).on('click', '.settings .label', function() {
+	});
+
+	diagram.on('change', ".move.settings input:radio[name='color']", function(){
 		switchcolor($(this).closest('.diagram'))
-	  	generate_output($(this).closest('.diagram'));
+	});
+
+	diagram.on('change', ".move.settings input.movenumber", function() {
+		renumber($(this).closest('.diagram'))
 	});
 
 	diagram.on('click', '.close.button', function(){
@@ -115,6 +132,8 @@ function create_diagram(width, height) {
 		newdiagram.find('.data tr td').each(function(){
 			clear($(this));
 		});
+		newdiagram.find('.labels option').first().prop('selected', true).closest('.label').find('span').text(newdiagram.find('.labels').val());
+		newdiagram.find('.moves option').first().prop('selected', true)
 		generate_output(newdiagram);
 		newdiagram.css('display', 'none');
 		$(this).closest('.diagram').after(newdiagram);
@@ -201,6 +220,9 @@ function generate_output(diagram) {
 
 	line = diagram.find('.picker').hasClass('black') ? '$$B' : '$$W';
 	line += diagram.find('input.coords').is(':checked') ? 'c' : '';
+	if (diagram.find('.move.settings input.movenumber').val() != '1') {
+		line += 'm' + diagram.find('.move.settings input.movenumber').val();
+	}
 	line += ' ' + diagram.find('input.caption').val();
 
 	lines.push(line);
@@ -324,19 +346,26 @@ function marker(cell, mark) {
 	}
 }
 
+function next_label_from(diagram, label) {
+	next = String.fromCharCode((97 + (((label.charCodeAt(0)) % 32) % 26)))
+	diagram.find('.tool.label span.current').text(next);
+	diagram.data('label', next);
+}
+
 function label(cell) {
 	if (!$(cell).hasClass('empty')) {
 		alert("You can only label empty points. For stones, use markers.")
 	}
 	else {
-		value = $(cell).closest('.diagram').find('.labels').val();
-		if ($(cell).data('char') == value) {
+		value = cell.closest('.diagram').data('label');
+		if (cell.data('char') == value) {
 			clear(cell);
 		}
 		else {
 			clear(cell);
-			$(cell).data('char', value);
-			$(cell).append($('<span class="label">'+value+'</span>'))
+			cell.data('char', value);
+			cell.append($('<span class="label">'+value+'</span>'))
+			next_label_from(cell.closest('.diagram'), value);
 		}
 	}
 }
@@ -348,9 +377,9 @@ function move(cell) {
 	sel = cell.closest('.diagram').find('.moves option:selected');
 	clear(cell)
 	cell.data('char', sel.val());
-	cell.append($('<span class="move">'+(sel.val()==0?10:sel.val())+'</span>'));
-
+	cell.append($('<span class="move"/>'));
 	cell.removeClass('empty').addClass('move ' + (sel.val()%2 ? cell.closest('.diagram').data('oddcolor'):cell.closest('.diagram').data('evencolor')));
+	renumber(cell.closest('.diagram'));
 	sel.prop('selected', false).next().prop('selected', true);
 }
 
@@ -363,17 +392,38 @@ function unmove(cell) {
 	}
 }
 
+function renumber(diagram) {
+	diagram.find('td.move').each(function(){
+		cell = $(this)
+		start = parseInt(cell.closest('.diagram').find('.move.settings input.movenumber').val());
+		number = parseInt(cell.data('char'))
+		if (number == 0) number = 10; 
+		mynum = (start + number - 1) % 100;
+		if (mynum == 0) mynum = '00';
+		cell.find('span').text(mynum);
+	})
+	diagram.find('.move.settings select option').each(function(){
+		start = parseInt($(this).closest('.diagram').find('.move.settings input.movenumber').val());
+		number = parseInt($(this).val())
+		number = !number ? 10 : number;
+		mynum = (start + number - 1) % 100;
+		$(this).text(''+mynum); 
+	});
+	generate_output(diagram);
+}
+
 function switchcolor(diagram) {
-	picker = diagram.find('.picker')
-	if (picker.hasClass('black')) {
-		picker.addClass('white').removeClass('black');
-		diagram.data('oddcolor', 'white');
-		diagram.data('evencolor', 'black');
+	newcolor = diagram.find(".move.settings input:radio[name='color']:checked").val()
+	if (newcolor == diagram.data('oddcolor')) {
+		return; // no change
 	}
-	else {
-		picker.addClass('black').removeClass('white');  		
+	if (newcolor == 'black') {
 		diagram.data('oddcolor', 'black');
 		diagram.data('evencolor', 'white');
+	}
+	else {
+		diagram.data('oddcolor', 'white');
+		diagram.data('evencolor', 'black');
 	}
 	diagram.find('td.move').each(function() {
 		if ($(this).hasClass('black')) {
@@ -383,6 +433,7 @@ function switchcolor(diagram) {
 			$(this).addClass('black').removeClass('white');  			
 		}
 	});
+	generate_output(diagram);
 }
 
 /**

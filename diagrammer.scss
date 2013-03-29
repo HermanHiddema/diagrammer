@@ -204,7 +204,8 @@ h4 {
 	height: $grid+2;
 	position: relative;
 	padding-right: 2*$grid/3;
-	.tool, .picker {
+	.tool {
+		position: relative;
 		width: $grid;
 		height: $grid;
 		float: left;
@@ -218,37 +219,75 @@ h4 {
 		}
 		&.black    { @include sprite(1,1,4); color: white; }
 		&.white    { @include sprite(1,2,4); color: black; }
-		&.hoshi    { @include sprite(2,5,1) }
-		&.triangle { @include sprite(3,0,1) }
-		&.circle   { @include sprite(4,0,1) }
-		&.square   { @include sprite(5,0,1) }
-		&.cross    { @include sprite(6,0,1) }
-		&.greyed   { @include sprite(7,0,1) }
-		&.label, &.move, &.coords {
-			width: auto;
-			padding: 0 2px;
+		&.hoshi    { @include sprite(2,5,1); }
+		&.triangle { @include sprite(3,0,1); }
+		&.circle   { @include sprite(4,0,1); }
+		&.square   { @include sprite(5,0,1); }
+		&.cross    { @include sprite(6,0,1); }
+		&.greyed   { @include sprite(7,0,1); }
+		&.label    { 
+			@include sprite(1,5,1);
+			span {
+				background-color: #f2b06d;
+			}
+		}
+		&.move     {
+			@include sprite(1,1,4);
+			span {
+				color: white;
+				background-color: transparent;
+			}
+		}
+		&.coords {
+			background-position: (2-$grid/2) (-5.4* $grid);
+			input {
+				margin: 4px 0 0 4px;
+			}
+		}
+
+		&.label, &.move    { 
+			span {
+				display: block;
+				width: 3*$grid/4;
+				height: 3*$grid/4;
+				text-align: center;
+				overflow: hidden;
+				margin: $grid/8;
+				font-size: 16px;
+				line-height: 3*$grid/4;
+			}		
+		}
+		.settings {
+			position: absolute;
+			display: none;
+			top: $grid;
+			left: 0;
+			z-index: 1000;
+			padding: 5px;
+			border: 1px solid rgba(0,0,0,0.1);
 			background-color: #f2b06d;
 			background-image: none;
 			font-size: 13px;
 			line-height: $grid;
-			input, select {
-				height: $grid;
+			&.move {
+				width: 180px;
+			}
+			.label {
+				width: 70px;
+				position: relative;
+				span {
+					cursor: pointer;
+					display: block;
+					float: left;
+					text-align: center;
+					font-size: 16px;
+					background-color: #f2b06d;
+				}
 			}
 		}
 	}
-	.picker {
-		span {
-			display: block;
-			width: $grid - 2;
-			margin: 2px auto;
-			text-align: center;
-			overflow: hidden;
-			font-size: 16px;
-			background: transparent;
-		}		
-	}
 	.close.button {
-		cursor: hand;
+		cursor: pointer;
 		color: red;
 		position: absolute;
 		font-size: $grid;

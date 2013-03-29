@@ -27,23 +27,33 @@
 		<div class="tools bar">
 			<div data-tool="black"    class="black stone tool active"></div>
 			<div data-tool="white"    class="white stone tool"></div>
+			<div data-tool="move"     class="move tool">
+				<span>1</span>
+				<div class="settings move">
+					<label for"move">Move:
+						<select class="moves" name="move"></select>
+					</label><br/>
+					First move number: <input type="text" name="movenumber" class="movenumber" size="2" value="1"/><br/>
+					Color of the first move:
+					<form>
+						<label><input type="radio" name="color" value="black" checked="checked"/>Black</label>
+						<label><input type="radio" name="color" value="white"/>White</label>
+					</form>				
+				</div>			
+			</div>
 			<div data-tool="hoshi"    class="hoshi tool"></div>
 			<div data-tool="triangle" class="marker tool triangle"></div>
 			<div data-tool="circle"   class="marker tool circle"></div>
 			<div data-tool="square"   class="marker tool square"></div>
 			<div data-tool="cross"    class="marker tool cross"></div>
+			<div data-tool="label"    class="label tool"><span class='current'>a</span>
+				<div class="settings label">
+					<div class="labels"></div>
+				</div>
+			</div>
 			<div data-tool="greyed"   class="marker tool greyed"></div>
-			<div data-tool="label"    class="label tool">
-				<label for"label">Label:</label>
-				<select class="labels" name="label"></select>
-			</div>
-			<div data-tool="move"     class="move tool">
-				<label for"move">Move:</label>
-				<select class="moves" name="move"></select>
-			</div>
-			<div class="picker black"><span>1</span></div>
 			<div data-tool="coords"   class="coords tool">
-				<label><input type="checkbox" name="coords" class="coords">Coords</label>
+				<input type="checkbox" name="coords" class="coords">
 			</div>
 			<div class="close button">&times;</div>
 		</div>
