@@ -141,7 +141,6 @@ function create_diagram(width, height) {
 			clear($(this));
 		});
 		nextmove = parseInt(diagram.data('startnum')) + maxmove(diagram);
-		alert(nextmove);
 		newdiagram.find('.moves.settings input.movenum').val(nextmove);
 		newdiagram.data('startnum', nextmove);
 		if (maxmove(diagram) % 2) {
