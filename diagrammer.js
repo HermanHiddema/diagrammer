@@ -513,7 +513,7 @@ function switchcolor(diagram) {
 	newcolor = diagram.data('evencolor');
 	diagram.data('evencolor', diagram.data('oddcolor'));
 	diagram.data('oddcolor', newcolor);
-	diagram.find('td.move, .moves.settings div.move').each(function() {
+	diagram.find('.sprite.move').each(function() {
 		$(this).toggleClass('black white');
 	});
 	generate_output(diagram);
