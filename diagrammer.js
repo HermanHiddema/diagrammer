@@ -140,12 +140,18 @@ function create_diagram(width, height) {
 		newdiagram.find('.data tr td').each(function(){
 			clear($(this));
 		});
-		newdiagram.find('.labels option').first().prop('selected', true).closest('.label').find('span').text(newdiagram.find('.labels').val());
-		newdiagram.find('.moves option').first().prop('selected', true)
-		generate_output(newdiagram);
+		nextmove = parseInt(diagram.data('startnum')) + maxmove(diagram);
+		alert(nextmove);
+		newdiagram.find('.moves.settings input.movenum').val(nextmove);
+		newdiagram.data('startnum', nextmove);
+		if (maxmove(diagram) % 2) {
+			switchcolor(newdiagram);
+		}
+		set_movenum(newdiagram, 1);
+		set_label(newdiagram, 'a');
+		renumber(newdiagram);
 		newdiagram.css('display', 'none');
 		$(this).closest('.diagram').after(newdiagram);
-		grid = parseInt($('<div class="board"/>').css('font-size'));
 
 		$(this).closest('.diagram').find('.viewport').resizable({
 			grid:[grid,grid],
@@ -327,7 +333,7 @@ function resized() {
 }
 
 function clear(cell) {
-	$(cell).removeClass('triangle circle square cross greyed')
+	$(cell).removeClass('triangle circle square cross greyed move')
 	$(cell).html(''); // remove any previous label or move	
 	if ($(cell).hasClass('empty')) {
 		$(cell).data('char', $(cell).hasClass('hoshi')?',':'.');
@@ -421,7 +427,7 @@ function set_movenum(diagram, num) {
 	}
 	else {
 		diagram.data('movenum', num);
-		diagram.find('.tool.move>span').text(num == 10 ? ((9 + start) %100) : (((num-1) + start) %100));
+		diagram.find('.tool.move>span').text((num % 10) == 0 ? ((9 + start) %100) : (((num-1) + start) %100));
 		diagram.find('.tool.move').removeClass('black white').addClass((num % 2 ? diagram.data('oddcolor'):diagram.data('evencolor')));
 	}
 }
@@ -443,6 +449,18 @@ function label(cell) {
 			next = String.fromCharCode((97 + (((value.charCodeAt(0)) % 32) % 26)))
 			set_label(cell.closest('.diagram'), next);
 		}
+	}
+}
+
+function maxmove(diagram) {
+	vals = diagram.find('td.move').map(function() {
+		return $(this).data('char')
+	}).get().sort();
+	if (vals[0] == '0') {
+		return 10;
+	}
+	else {
+		return parseInt(vals[vals.length-1]);
 	}
 }
 
