@@ -458,7 +458,7 @@ function move(cell) {
 	else {
 		start = parseInt(diagram.data('startnum'));
 		clear(cell)
-		cell.data('char', num);
+		cell.data('char', (num%10));
 		cell.append($('<span class="number"/>').text(num == 0 ? ((9 + start) %100) : (((num-1) + start) %100)));
 		cell.removeClass('empty').addClass('move ' + (num % 2 ? diagram.data('oddcolor'):diagram.data('evencolor')));
 		set_movenum(diagram, num+1);
