@@ -330,6 +330,376 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+#template {
+  display: none; }
+
+.diagram {
+  border: 1px solid #ccc;
+  border-radius: 11.5px;
+  margin: 11.5px;
+  padding: 11.5px;
+  float: left;
+  clear: left;
+  /* sprites: */ }
+  .diagram:after {
+    /* clearfix */
+    content: "";
+    display: table;
+    clear: both; }
+  .diagram .sprite {
+    background-image: url(diagrammer.png);
+    background-color: #f2b06d;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    width: 23px;
+    height: 23px; }
+    .diagram .sprite.normal.tool {
+      background-position: 0px 0; }
+    .diagram .sprite.normal.empty {
+      background-position: 0px -23px; }
+    .diagram .sprite.normal.empty.left {
+      background-position: 0px -46px; }
+    .diagram .sprite.normal.empty.top {
+      background-position: 0px -69px; }
+    .diagram .sprite.normal.empty.left.top {
+      background-position: 0px -92px; }
+    .diagram .sprite.normal.empty.right {
+      background-position: 0px -115px; }
+    .diagram .sprite.normal.empty.left.right {
+      background-position: 0px -138px; }
+    .diagram .sprite.normal.empty.top.right {
+      background-position: 0px -161px; }
+    .diagram .sprite.normal.empty.left.top.right {
+      background-position: 0px -184px; }
+    .diagram .sprite.normal.empty.bottom {
+      background-position: 0px -207px; }
+    .diagram .sprite.normal.empty.left.bottom {
+      background-position: 0px -230px; }
+    .diagram .sprite.normal.empty.top.bottom {
+      background-position: 0px -253px; }
+    .diagram .sprite.normal.empty.left.top.bottom {
+      background-position: 0px -276px; }
+    .diagram .sprite.normal.empty.right.bottom {
+      background-position: 0px -299px; }
+    .diagram .sprite.normal.empty.left.right.bottom {
+      background-position: 0px -322px; }
+    .diagram .sprite.normal.empty.top.right.bottom {
+      background-position: 0px -345px; }
+    .diagram .sprite.normal.empty.left.top.right.bottom {
+      background-position: 0px -368px; }
+    .diagram .sprite.normal.black {
+      background-position: 0px -391px; }
+    .diagram .sprite.normal.white {
+      background-position: 0px -414px; }
+    .diagram .sprite.hoshi.empty {
+      background-position: -23px -23px; }
+    .diagram .sprite.hoshi.empty.left {
+      background-position: -23px -46px; }
+    .diagram .sprite.hoshi.empty.top {
+      background-position: -23px -69px; }
+    .diagram .sprite.hoshi.empty.left.top {
+      background-position: -23px -92px; }
+    .diagram .sprite.hoshi.empty.right {
+      background-position: -23px -115px; }
+    .diagram .sprite.hoshi.empty.left.right {
+      background-position: -23px -138px; }
+    .diagram .sprite.hoshi.empty.top.right {
+      background-position: -23px -161px; }
+    .diagram .sprite.hoshi.empty.left.top.right {
+      background-position: -23px -184px; }
+    .diagram .sprite.hoshi.empty.bottom {
+      background-position: -23px -207px; }
+    .diagram .sprite.hoshi.empty.left.bottom {
+      background-position: -23px -230px; }
+    .diagram .sprite.hoshi.empty.top.bottom {
+      background-position: -23px -253px; }
+    .diagram .sprite.hoshi.empty.left.top.bottom {
+      background-position: -23px -276px; }
+    .diagram .sprite.hoshi.empty.right.bottom {
+      background-position: -23px -299px; }
+    .diagram .sprite.hoshi.empty.left.right.bottom {
+      background-position: -23px -322px; }
+    .diagram .sprite.hoshi.empty.top.right.bottom {
+      background-position: -23px -345px; }
+    .diagram .sprite.hoshi.empty.left.top.right.bottom {
+      background-position: -23px -368px; }
+    .diagram .sprite.hoshi.black {
+      background-position: -23px -391px; }
+    .diagram .sprite.hoshi.white {
+      background-position: -23px -414px; }
+    .diagram .sprite.circle.tool {
+      background-position: -46px 0; }
+    .diagram .sprite.circle.empty {
+      background-position: -46px -23px; }
+    .diagram .sprite.circle.empty.left {
+      background-position: -46px -46px; }
+    .diagram .sprite.circle.empty.top {
+      background-position: -46px -69px; }
+    .diagram .sprite.circle.empty.left.top {
+      background-position: -46px -92px; }
+    .diagram .sprite.circle.empty.right {
+      background-position: -46px -115px; }
+    .diagram .sprite.circle.empty.left.right {
+      background-position: -46px -138px; }
+    .diagram .sprite.circle.empty.top.right {
+      background-position: -46px -161px; }
+    .diagram .sprite.circle.empty.left.top.right {
+      background-position: -46px -184px; }
+    .diagram .sprite.circle.empty.bottom {
+      background-position: -46px -207px; }
+    .diagram .sprite.circle.empty.left.bottom {
+      background-position: -46px -230px; }
+    .diagram .sprite.circle.empty.top.bottom {
+      background-position: -46px -253px; }
+    .diagram .sprite.circle.empty.left.top.bottom {
+      background-position: -46px -276px; }
+    .diagram .sprite.circle.empty.right.bottom {
+      background-position: -46px -299px; }
+    .diagram .sprite.circle.empty.left.right.bottom {
+      background-position: -46px -322px; }
+    .diagram .sprite.circle.empty.top.right.bottom {
+      background-position: -46px -345px; }
+    .diagram .sprite.circle.empty.left.top.right.bottom {
+      background-position: -46px -368px; }
+    .diagram .sprite.circle.black {
+      background-position: -46px -391px; }
+    .diagram .sprite.circle.white {
+      background-position: -46px -414px; }
+    .diagram .sprite.cross.tool {
+      background-position: -69px 0; }
+    .diagram .sprite.cross.empty {
+      background-position: -69px -23px; }
+    .diagram .sprite.cross.empty.left {
+      background-position: -69px -46px; }
+    .diagram .sprite.cross.empty.top {
+      background-position: -69px -69px; }
+    .diagram .sprite.cross.empty.left.top {
+      background-position: -69px -92px; }
+    .diagram .sprite.cross.empty.right {
+      background-position: -69px -115px; }
+    .diagram .sprite.cross.empty.left.right {
+      background-position: -69px -138px; }
+    .diagram .sprite.cross.empty.top.right {
+      background-position: -69px -161px; }
+    .diagram .sprite.cross.empty.left.top.right {
+      background-position: -69px -184px; }
+    .diagram .sprite.cross.empty.bottom {
+      background-position: -69px -207px; }
+    .diagram .sprite.cross.empty.left.bottom {
+      background-position: -69px -230px; }
+    .diagram .sprite.cross.empty.top.bottom {
+      background-position: -69px -253px; }
+    .diagram .sprite.cross.empty.left.top.bottom {
+      background-position: -69px -276px; }
+    .diagram .sprite.cross.empty.right.bottom {
+      background-position: -69px -299px; }
+    .diagram .sprite.cross.empty.left.right.bottom {
+      background-position: -69px -322px; }
+    .diagram .sprite.cross.empty.top.right.bottom {
+      background-position: -69px -345px; }
+    .diagram .sprite.cross.empty.left.top.right.bottom {
+      background-position: -69px -368px; }
+    .diagram .sprite.cross.black {
+      background-position: -69px -391px; }
+    .diagram .sprite.cross.white {
+      background-position: -69px -414px; }
+    .diagram .sprite.square.tool {
+      background-position: -92px 0; }
+    .diagram .sprite.square.empty {
+      background-position: -92px -23px; }
+    .diagram .sprite.square.empty.left {
+      background-position: -92px -46px; }
+    .diagram .sprite.square.empty.top {
+      background-position: -92px -69px; }
+    .diagram .sprite.square.empty.left.top {
+      background-position: -92px -92px; }
+    .diagram .sprite.square.empty.right {
+      background-position: -92px -115px; }
+    .diagram .sprite.square.empty.left.right {
+      background-position: -92px -138px; }
+    .diagram .sprite.square.empty.top.right {
+      background-position: -92px -161px; }
+    .diagram .sprite.square.empty.left.top.right {
+      background-position: -92px -184px; }
+    .diagram .sprite.square.empty.bottom {
+      background-position: -92px -207px; }
+    .diagram .sprite.square.empty.left.bottom {
+      background-position: -92px -230px; }
+    .diagram .sprite.square.empty.top.bottom {
+      background-position: -92px -253px; }
+    .diagram .sprite.square.empty.left.top.bottom {
+      background-position: -92px -276px; }
+    .diagram .sprite.square.empty.right.bottom {
+      background-position: -92px -299px; }
+    .diagram .sprite.square.empty.left.right.bottom {
+      background-position: -92px -322px; }
+    .diagram .sprite.square.empty.top.right.bottom {
+      background-position: -92px -345px; }
+    .diagram .sprite.square.empty.left.top.right.bottom {
+      background-position: -92px -368px; }
+    .diagram .sprite.square.black {
+      background-position: -92px -391px; }
+    .diagram .sprite.square.white {
+      background-position: -92px -414px; }
+    .diagram .sprite.triangle.tool {
+      background-position: -115px 0; }
+    .diagram .sprite.triangle.empty {
+      background-position: -115px -23px; }
+    .diagram .sprite.triangle.empty.left {
+      background-position: -115px -46px; }
+    .diagram .sprite.triangle.empty.top {
+      background-position: -115px -69px; }
+    .diagram .sprite.triangle.empty.left.top {
+      background-position: -115px -92px; }
+    .diagram .sprite.triangle.empty.right {
+      background-position: -115px -115px; }
+    .diagram .sprite.triangle.empty.left.right {
+      background-position: -115px -138px; }
+    .diagram .sprite.triangle.empty.top.right {
+      background-position: -115px -161px; }
+    .diagram .sprite.triangle.empty.left.top.right {
+      background-position: -115px -184px; }
+    .diagram .sprite.triangle.empty.bottom {
+      background-position: -115px -207px; }
+    .diagram .sprite.triangle.empty.left.bottom {
+      background-position: -115px -230px; }
+    .diagram .sprite.triangle.empty.top.bottom {
+      background-position: -115px -253px; }
+    .diagram .sprite.triangle.empty.left.top.bottom {
+      background-position: -115px -276px; }
+    .diagram .sprite.triangle.empty.right.bottom {
+      background-position: -115px -299px; }
+    .diagram .sprite.triangle.empty.left.right.bottom {
+      background-position: -115px -322px; }
+    .diagram .sprite.triangle.empty.top.right.bottom {
+      background-position: -115px -345px; }
+    .diagram .sprite.triangle.empty.left.top.right.bottom {
+      background-position: -115px -368px; }
+    .diagram .sprite.triangle.black {
+      background-position: -115px -391px; }
+    .diagram .sprite.triangle.white {
+      background-position: -115px -414px; }
+    .diagram .sprite.greyed.tool {
+      background-position: -138px 0; }
+    .diagram .sprite.greyed.empty {
+      background-position: -138px -23px; }
+    .diagram .sprite.greyed.empty.left {
+      background-position: -138px -46px; }
+    .diagram .sprite.greyed.empty.top {
+      background-position: -138px -69px; }
+    .diagram .sprite.greyed.empty.left.top {
+      background-position: -138px -92px; }
+    .diagram .sprite.greyed.empty.right {
+      background-position: -138px -115px; }
+    .diagram .sprite.greyed.empty.left.right {
+      background-position: -138px -138px; }
+    .diagram .sprite.greyed.empty.top.right {
+      background-position: -138px -161px; }
+    .diagram .sprite.greyed.empty.left.top.right {
+      background-position: -138px -184px; }
+    .diagram .sprite.greyed.empty.bottom {
+      background-position: -138px -207px; }
+    .diagram .sprite.greyed.empty.left.bottom {
+      background-position: -138px -230px; }
+    .diagram .sprite.greyed.empty.top.bottom {
+      background-position: -138px -253px; }
+    .diagram .sprite.greyed.empty.left.top.bottom {
+      background-position: -138px -276px; }
+    .diagram .sprite.greyed.empty.right.bottom {
+      background-position: -138px -299px; }
+    .diagram .sprite.greyed.empty.left.right.bottom {
+      background-position: -138px -322px; }
+    .diagram .sprite.greyed.empty.top.right.bottom {
+      background-position: -138px -345px; }
+    .diagram .sprite.greyed.empty.left.top.right.bottom {
+      background-position: -138px -368px; }
+    .diagram .sprite.black {
+      color: white; }
+      .diagram .sprite.black.tool {
+        background-position: 0 -391px; }
+    .diagram .sprite.white {
+      color: black; }
+      .diagram .sprite.white.tool {
+        background-position: 0 -414px; }
+    .diagram .sprite.hoshi.tool {
+      background-position: -23px -23px; }
+    .diagram .sprite.label.tool {
+      background-position: 0 -23px; }
+    .diagram .sprite.toggle.tool {
+      background-position: 0 -23px; }
+    .diagram .sprite span.letter {
+      display: block;
+      width: 15px;
+      height: 15px;
+      text-align: center;
+      vertical-align: middle;
+      overflow: hidden;
+      margin: 4px auto;
+      font-size: 13px;
+      line-height: 14px;
+      background-color: #f2b06d; }
+    .diagram .sprite span.number {
+      display: block;
+      width: 21px;
+      height: 21px;
+      text-align: center;
+      margin: 1px 0;
+      overflow: hidden;
+      font-size: 16px;
+      line-height: 21px;
+      letter-spacing: -2px;
+      background: transparent; }
+  .diagram .board {
+    font-size: 23px;
+    background-color: #d99e62;
+    padding: 23px; }
+    .diagram .board .grid {
+      position: relative; }
+      .diagram .board .grid .data, .diagram .board .grid .viewport, .diagram .board .grid .overlay, .diagram .board .grid .letters, .diagram .board .grid .numbers {
+        position: absolute;
+        top: 0;
+        left: 0; }
+      .diagram .board .grid .data {
+        overflow: hidden; }
+        .diagram .board .grid .data table {
+          margin: 0;
+          padding: 0;
+          border-collapse: collapse; }
+          .diagram .board .grid .data table tr td {
+            position: relative;
+            width: 23px;
+            height: 23px;
+            padding: 0; }
+      .diagram .board .grid .viewport {
+        overflow: hidden;
+        pointer-events: none; }
+        .diagram .board .grid .viewport .ui-resizable-handle {
+          pointer-events: auto; }
+      .diagram .board .grid .overlay {
+        border-style: solid;
+        border-color: rgba(0, 0, 0, 0.1);
+        border-width: 0;
+        pointer-events: none; }
+      .diagram .board .grid .letters {
+        display: none;
+        top: -17px;
+        left: -19px;
+        border-left: 19px solid #f2b06d;
+        background-image: url(letters.png);
+        background-repeat: no-repeat;
+        background-position: -23px top;
+        height: 17px;
+        width: 100%; }
+      .diagram .board .grid .numbers {
+        display: none;
+        left: -19px;
+        background-image: url(numbers.png);
+        background-repeat: no-repeat;
+        background-position: left bottom;
+        height: 100%;
+        width: 19px; }
+
 .help {
   display: none;
   border-color: #ccc;
@@ -355,218 +725,13 @@ table {
   margin-left: 23px;
   clear: left; }
 
-#width {
-  text-align: right; }
+#width, #height {
+  width: 23px; }
 
-#template {
-  display: none; }
-
-.diagram {
-  border: 1px solid #ccc;
-  border-radius: 11.5px;
-  margin: 11.5px;
-  padding: 11.5px;
-  float: left;
-  clear: left; }
-  .diagram:after {
-    content: "";
-    display: table;
-    clear: both; }
-
-.main:after {
+.main:after, .bottom:after {
   content: "";
   display: table;
   clear: both; }
-
-.data {
-  position: absolute;
-  overflow: hidden;
-  top: 0;
-  left: 0; }
-  .data table {
-    border-collapse: collapse; }
-    .data table tr td {
-      position: relative;
-      width: 23px;
-      height: 23px;
-      padding: 0;
-      background-color: #f2b06d;
-      background-image: url(diagrammer.png);
-      background-repeat: no-repeat; }
-      .data table tr td.empty.normal.top.left {
-        background-position: 0px -23px; }
-      .data table tr td.empty.normal.top.center {
-        background-position: 0px -46px; }
-      .data table tr td.empty.normal.top.right {
-        background-position: 0px -69px; }
-      .data table tr td.empty.normal.middle.left {
-        background-position: 0px -92px; }
-      .data table tr td.empty.normal.middle.center {
-        background-position: 0px -115px; }
-      .data table tr td.empty.normal.middle.right {
-        background-position: 0px -138px; }
-      .data table tr td.empty.normal.bottom.left {
-        background-position: 0px -161px; }
-      .data table tr td.empty.normal.bottom.center {
-        background-position: 0px -184px; }
-      .data table tr td.empty.normal.bottom.right {
-        background-position: 0px -207px; }
-      .data table tr td.black.normal {
-        background-position: 0px -230px; }
-      .data table tr td.white.normal {
-        background-position: 0px -253px; }
-      .data table tr td.empty.hoshi.top.left {
-        background-position: -23px -23px; }
-      .data table tr td.empty.hoshi.top.center {
-        background-position: -23px -46px; }
-      .data table tr td.empty.hoshi.top.right {
-        background-position: -23px -69px; }
-      .data table tr td.empty.hoshi.middle.left {
-        background-position: -23px -92px; }
-      .data table tr td.empty.hoshi.middle.center {
-        background-position: -23px -115px; }
-      .data table tr td.empty.hoshi.middle.right {
-        background-position: -23px -138px; }
-      .data table tr td.empty.hoshi.bottom.left {
-        background-position: -23px -161px; }
-      .data table tr td.empty.hoshi.bottom.center {
-        background-position: -23px -184px; }
-      .data table tr td.empty.hoshi.bottom.right {
-        background-position: -23px -207px; }
-      .data table tr td.black.hoshi {
-        background-position: -23px -230px; }
-      .data table tr td.white.hoshi {
-        background-position: -23px -253px; }
-      .data table tr td.empty.triangle.top.left {
-        background-position: -46px -23px; }
-      .data table tr td.empty.triangle.top.center {
-        background-position: -46px -46px; }
-      .data table tr td.empty.triangle.top.right {
-        background-position: -46px -69px; }
-      .data table tr td.empty.triangle.middle.left {
-        background-position: -46px -92px; }
-      .data table tr td.empty.triangle.middle.center {
-        background-position: -46px -115px; }
-      .data table tr td.empty.triangle.middle.right {
-        background-position: -46px -138px; }
-      .data table tr td.empty.triangle.bottom.left {
-        background-position: -46px -161px; }
-      .data table tr td.empty.triangle.bottom.center {
-        background-position: -46px -184px; }
-      .data table tr td.empty.triangle.bottom.right {
-        background-position: -46px -207px; }
-      .data table tr td.black.triangle {
-        background-position: -46px -230px; }
-      .data table tr td.white.triangle {
-        background-position: -46px -253px; }
-      .data table tr td.empty.circle.top.left {
-        background-position: -69px -23px; }
-      .data table tr td.empty.circle.top.center {
-        background-position: -69px -46px; }
-      .data table tr td.empty.circle.top.right {
-        background-position: -69px -69px; }
-      .data table tr td.empty.circle.middle.left {
-        background-position: -69px -92px; }
-      .data table tr td.empty.circle.middle.center {
-        background-position: -69px -115px; }
-      .data table tr td.empty.circle.middle.right {
-        background-position: -69px -138px; }
-      .data table tr td.empty.circle.bottom.left {
-        background-position: -69px -161px; }
-      .data table tr td.empty.circle.bottom.center {
-        background-position: -69px -184px; }
-      .data table tr td.empty.circle.bottom.right {
-        background-position: -69px -207px; }
-      .data table tr td.black.circle {
-        background-position: -69px -230px; }
-      .data table tr td.white.circle {
-        background-position: -69px -253px; }
-      .data table tr td.empty.square.top.left {
-        background-position: -92px -23px; }
-      .data table tr td.empty.square.top.center {
-        background-position: -92px -46px; }
-      .data table tr td.empty.square.top.right {
-        background-position: -92px -69px; }
-      .data table tr td.empty.square.middle.left {
-        background-position: -92px -92px; }
-      .data table tr td.empty.square.middle.center {
-        background-position: -92px -115px; }
-      .data table tr td.empty.square.middle.right {
-        background-position: -92px -138px; }
-      .data table tr td.empty.square.bottom.left {
-        background-position: -92px -161px; }
-      .data table tr td.empty.square.bottom.center {
-        background-position: -92px -184px; }
-      .data table tr td.empty.square.bottom.right {
-        background-position: -92px -207px; }
-      .data table tr td.black.square {
-        background-position: -92px -230px; }
-      .data table tr td.white.square {
-        background-position: -92px -253px; }
-      .data table tr td.empty.cross.top.left {
-        background-position: -115px -23px; }
-      .data table tr td.empty.cross.top.center {
-        background-position: -115px -46px; }
-      .data table tr td.empty.cross.top.right {
-        background-position: -115px -69px; }
-      .data table tr td.empty.cross.middle.left {
-        background-position: -115px -92px; }
-      .data table tr td.empty.cross.middle.center {
-        background-position: -115px -115px; }
-      .data table tr td.empty.cross.middle.right {
-        background-position: -115px -138px; }
-      .data table tr td.empty.cross.bottom.left {
-        background-position: -115px -161px; }
-      .data table tr td.empty.cross.bottom.center {
-        background-position: -115px -184px; }
-      .data table tr td.empty.cross.bottom.right {
-        background-position: -115px -207px; }
-      .data table tr td.black.cross {
-        background-position: -115px -230px; }
-      .data table tr td.white.cross {
-        background-position: -115px -253px; }
-      .data table tr td.empty.greyed.top.left {
-        background-position: -138px -23px; }
-      .data table tr td.empty.greyed.top.center {
-        background-position: -138px -46px; }
-      .data table tr td.empty.greyed.top.right {
-        background-position: -138px -69px; }
-      .data table tr td.empty.greyed.middle.left {
-        background-position: -138px -92px; }
-      .data table tr td.empty.greyed.middle.center {
-        background-position: -138px -115px; }
-      .data table tr td.empty.greyed.middle.right {
-        background-position: -138px -138px; }
-      .data table tr td.empty.greyed.bottom.left {
-        background-position: -138px -161px; }
-      .data table tr td.empty.greyed.bottom.center {
-        background-position: -138px -184px; }
-      .data table tr td.empty.greyed.bottom.right {
-        background-position: -138px -207px; }
-      .data table tr td.black.greyed {
-        background-position: -138px -230px; }
-      .data table tr td.white.greyed {
-        background-position: -138px -253px; }
-      .data table tr td.black {
-        color: white; }
-      .data table tr td.white {
-        color: black; }
-      .data table tr td .label {
-        display: block;
-        width: 15.33333px;
-        text-align: center;
-        overflow: hidden;
-        margin: 0 auto;
-        font-size: 16px;
-        background-color: #f2b06d; }
-      .data table tr td .move {
-        display: block;
-        width: 21px;
-        margin: 0 auto;
-        text-align: center;
-        overflow: hidden;
-        font-size: 16px;
-        background: transparent; }
 
 .column {
   position: relative;
@@ -582,120 +747,75 @@ h4 {
   resize: none; }
 
 .caption {
-  font-size: 23px; }
+  height: 23px; }
   .caption input.caption {
-    font-size: 15.33333px; }
+    font-size: 13px;
+    line-height: 13px;
+    height: 15px; }
 
 .bottom {
-  position: relative; }
+  position: relative;
+  height: 23px; }
 
 .follow {
   position: absolute;
   right: 0;
-  bottom: 0; }
-
-.board {
-  font-size: 23px;
-  background-color: #d99e62;
-  padding: 23px; }
-  .board .grid {
-    position: relative; }
-    .board .grid .viewport {
-      position: absolute;
-      overflow: hidden;
-      left: 0px;
-      top: 0px;
-      pointer-events: none; }
-      .board .grid .viewport .ui-resizable-handle {
-        pointer-events: auto; }
-    .board .grid .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      border-style: solid;
-      border-color: rgba(0, 0, 0, 0.1);
-      border-width: 0;
-      pointer-events: none; }
+  top: 0; }
 
 .tools {
   height: 25px;
   position: relative;
   padding-right: 15.33333px; }
+  .tools ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .tools ul li {
+      float: left;
+      position: relative; }
   .tools .tool {
-    position: relative;
     width: 23px;
     height: 23px;
-    float: left;
+    text-align: center;
     border-width: 1px;
     border-color: #f2b06d;
-    border-style: solid;
-    background-image: url(diagrammer.png); }
+    border-style: solid; }
     .tools .tool.active {
       border-color: red; }
-    .tools .tool.black {
-      background-position: 0px -230px;
-      color: white; }
-    .tools .tool.white {
-      background-position: 0px -253px;
-      color: black; }
-    .tools .tool.hoshi {
-      background-position: -23px -115px; }
-    .tools .tool.triangle {
-      background-position: -46px 0px; }
-    .tools .tool.circle {
-      background-position: -69px 0px; }
-    .tools .tool.square {
-      background-position: -92px 0px; }
-    .tools .tool.cross {
-      background-position: -115px 0px; }
-    .tools .tool.greyed {
-      background-position: -138px 0px; }
-    .tools .tool.label {
-      background-position: 0px -115px; }
-      .tools .tool.label span {
-        background-color: #f2b06d; }
-    .tools .tool.move {
-      background-position: 0px -230px; }
-      .tools .tool.move span {
-        color: white;
-        background-color: transparent; }
     .tools .tool.coords {
-      background-position: -9.5px -124.2px; }
-      .tools .tool.coords input {
-        margin: 4px 0 0 4px; }
-    .tools .tool.label span, .tools .tool.move span {
-      display: block;
-      width: 17.25px;
-      height: 17.25px;
-      text-align: center;
-      overflow: hidden;
-      margin: 2.875px;
-      font-size: 16px;
-      line-height: 17.25px; }
-    .tools .tool .settings {
-      position: absolute;
-      display: none;
-      top: 23px;
-      left: 0;
-      z-index: 1000;
-      padding: 5px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      background-color: #f2b06d;
-      background-image: none;
-      font-size: 13px;
+      border-top: 1px dotted black;
+      border-left: 1px dotted black;
+      width: 13px;
+      height: 13px;
+      padding: 5px; }
+    .tools .tool.toggle {
+      font-size: 23px;
       line-height: 23px; }
-      .tools .tool .settings.move {
-        width: 180px; }
-      .tools .tool .settings .label {
-        width: 70px;
-        position: relative; }
-        .tools .tool .settings .label span {
-          cursor: pointer;
-          display: block;
-          float: left;
-          text-align: center;
-          font-size: 16px;
-          background-color: #f2b06d; }
+  .tools .settings {
+    position: absolute;
+    display: none;
+    top: 23px;
+    left: 0;
+    z-index: 1000;
+    padding: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #f2b06d;
+    font-size: 13px;
+    line-height: 23px; }
+    .tools .settings.moves {
+      width: 46px; }
+      .tools .settings.moves .move {
+        float: left; }
+      .tools .settings.moves .colorswitch {
+        width: 46px; }
+        .tools .settings.moves .colorswitch .color {
+          float: left; }
+      .tools .settings.moves input.movenum {
+        width: 34.5px; }
+    .tools .settings.labels {
+      width: 69px; }
+      .tools .settings.labels .label {
+        float: left; }
   .tools .close.button {
     cursor: pointer;
     color: red;

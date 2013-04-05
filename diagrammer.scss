@@ -1,6 +1,173 @@
 @import 'normalize';
 
 $grid: 23px;
+$types: normal, hoshi, circle, cross, square, triangle, greyed;
+$stones: black, white;
+$places: "left", "top", "left.top", "right", "left.right", "top.right", "left.top.right", "bottom", "left.bottom", "top.bottom", "left.top.bottom", "right.bottom", "left.right.bottom", "top.right.bottom", "left.top.right.bottom";
+
+
+#template {
+	display: none;
+}
+
+.diagram {
+	&:after { /* clearfix */
+		content: "";
+		display: table;
+		clear: both;
+	}
+	border: 1px solid #ccc;
+	border-radius: $grid/2;
+	margin: $grid/2;
+	padding: $grid/2;
+	float: left;
+	clear: left;
+
+	/* sprites: */
+	.sprite {
+		background-image: url(diagrammer.png);
+		background-color: #f2b06d;
+		background-repeat: no-repeat;
+		position: relative;
+		overflow: hidden;
+		width: $grid;
+		height: $grid;
+		@for $t from 1 through length($types) {
+			$type: nth($types, $t);
+			&.#{$type} {
+				@if $type != hoshi {
+					&.tool {
+						background-position: ((1-$t)*$grid) 0;
+					}
+				}
+				&.empty {
+					background-position: ((1-$t)*$grid) (-$grid);
+				}
+				@for $p from 1 through length($places) {
+					$place: nth($places, $p);
+					&.empty.#{$place} {
+						background-position: ((1-$t)*$grid) ((-1-$p)*$grid);
+					}
+				}
+				@for $s from 1 through length($stones) {
+					$stone: nth($stones, $s);
+					@if $type != greyed {
+						&.#{$stone} {
+							background-position: ((1-$t)*$grid) ((-16-$s)*$grid);
+						}
+					}
+				}
+			}
+		}
+		&.black {
+			color: white;
+			&.tool {
+				background-position: 0 (-17*$grid);			
+			}
+		}
+		&.white {
+			color: black;
+			&.tool {
+				background-position: 0 (-18*$grid);
+			}
+		}
+		&.hoshi.tool {
+			background-position: (-$grid) (-$grid);
+		}
+		&.label.tool {
+			background-position: 0 (-$grid);
+		}
+		&.toggle.tool {
+			background-position: 0 (-$grid);
+		}
+		span.letter {
+			display: block;
+			width: $grid - 8;
+			height: $grid - 8;
+			text-align: center;
+			vertical-align: middle;
+			overflow: hidden;
+			margin: 4px auto;
+			font-size: $grid - 10;
+			line-height: $grid - 9;
+			background-color: #f2b06d;
+		}
+		span.number {
+			display: block;
+			width: $grid - 2;
+			height: $grid - 2;
+			text-align: center;
+			margin: 1px 0;
+			overflow: hidden;
+			font-size: $grid - 7;
+			line-height: $grid - 2;
+			letter-spacing: -2px;
+			background: transparent;
+		}
+	}
+	.board {
+		font-size: $grid;
+		background-color: #d99e62;
+		padding: $grid;
+		.grid {
+			position: relative;
+			.data, .viewport, .overlay, .letters, .numbers {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			.data {
+				overflow: hidden;
+
+				table {
+					margin: 0;
+					padding: 0;
+					border-collapse: collapse;
+					tr td {
+						position: relative;
+						width: $grid;
+						height: $grid;
+						padding: 0;
+					}
+				}
+			}
+			.viewport {
+				overflow: hidden;
+				pointer-events: none;
+
+				.ui-resizable-handle {
+					pointer-events: auto;
+				}
+			}
+			.overlay {
+				border-style: solid;
+				border-color: rgba(0,0,0,0.1);
+				border-width: 0;
+				pointer-events: none;
+			}
+			.letters {
+				display: none;
+				top: -17px;
+				left: -19px;
+				border-left: 19px solid #f2b06d;
+				background-image: url(letters.png);
+				background-repeat: no-repeat;
+				background-position: (-$grid) top;
+				height: 17px;
+				width: 100%;
+			}
+			.numbers {
+				display: none;
+				left: -19px;
+				background-image: url(numbers.png);
+				background-repeat: no-repeat;
+				background-position: left bottom;
+				height: 100%;
+				width: 19px;
+			}
+		}
+	}
+}
 
 .help {
 	display: none;
@@ -30,37 +197,12 @@ $grid: 23px;
 	clear: left;
 }
 
-#width {
-	text-align: right;
-}
-
-#template {
-	display: none;
+#width, #height {
+	width: $grid;
 }
 
 
-
-@mixin sprite($s, $x, $y) {
-	$bgx: -($s - 1);
-	$bgy: -(3 * $y + $x - 3);
-	background-position: ($bgx * $grid) ($bgy * $grid); 
-}
-
-.diagram {
-	&:after {
-		content: "";
-		display: table;
-		clear: both;
-	}
-	border: 1px solid #ccc;
-	border-radius: $grid/2;
-	margin: $grid/2;
-	padding: $grid/2;
-	float: left;
-	clear: left;
-}
-
-.main {
+.main, .bottom {
 	&:after {
 		content: "";
 		display: table;
@@ -68,74 +210,6 @@ $grid: 23px;
 	}	
 }
 
-.data {
-	position: absolute;
-	overflow: hidden;
-	top: 0;
-	left: 0;
-
-	table {
-		border-collapse: collapse;
-		tr td {
-			position: relative;
-			width: $grid;
-			height: $grid;
-			padding: 0;
-			background-color: #f2b06d;
-			background-image: url(diagrammer.png);
-			background-repeat: no-repeat;
-
-			$list: normal, hoshi, triangle, circle, square, cross, greyed;
-			$rows: top, middle, bottom;
-			$cols: left, center, right;
-			$stones: black, white;
-			@for $i from 1 through length($list) {
-				$item: nth($list, $i);
-				@for $r from 1 through length($rows) {
-					$row: nth($rows, $r);
-					@for $c from 1 through length($cols) {
-						$col: nth($cols, $c);
-						&.empty.#{$item}.#{$row}.#{$col} {
-							@include sprite($i, $c, $r);
-						}
-					}
-				}
-				@for $s from 1 through length($stones) {
-					$stone: nth($stones, $s);
-					&.#{$stone}.#{$item} {
-						@include sprite($i, $s, 4)
-					}
-				}	
-			}
-
-			&.black {
-				color: white;
-			}
-			&.white {
-				color: black;
-			}
-
-			.label {
-				display: block;
-				width: 2*$grid/3;
-				text-align: center;
-				overflow: hidden;
-				margin: 0 auto;
-				font-size: 16px;
-				background-color: #f2b06d;
-			}
-			.move {
-				display: block;
-				width: $grid - 2;
-				margin: 0 auto;
-				text-align: center;
-				overflow: hidden;
-				font-size: 16px;
-				background: transparent;
-			}
-		}
-	}
-}
 
 .column {
 	position: relative;
@@ -154,135 +228,92 @@ h4 {
 }
 
 .caption {
-	font-size: $grid;
+	height: $grid;
 	input.caption {
-		font-size: 2*($grid/3)
+		font-size: $grid - 10;
+		line-height: $grid - 10;
+		height: $grid - 8;
 	}
-
 }
 
 .bottom {
 	position: relative;
+	height: $grid;
 }
 
 .follow {
 	position: absolute;
 	right: 0;
-	bottom: 0;
+	top: 0;
 }
 
-.board {
-	font-size: $grid;
-	background-color: #d99e62;
-	padding: $grid;
-	.grid {
-		position: relative;
-		.viewport {
-			position: absolute;
-			overflow: hidden;
-			left: 0px;
-			top: 0px;
-			pointer-events: none;
-
-			.ui-resizable-handle {
-				pointer-events: auto;
-			}
-		}
-		.overlay {
-			position: absolute;
-			top: 0;
-			left: 0;
-			border-style: solid;
-			border-color: rgba(0,0,0,0.1);
-			border-width: 0;
-			pointer-events: none;
-		}
-	}
-}
 
 .tools {
 	height: $grid+2;
 	position: relative;
 	padding-right: 2*$grid/3;
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		li {
+			float: left;
+			position: relative;
+		}
+	}
 	.tool {
-		position: relative;
 		width: $grid;
 		height: $grid;
-		float: left;
+		text-align: center;
 		border-width: 1px;
 		border-color: #f2b06d;
 		border-style: solid;
-		background-image: url(diagrammer.png);
 
 		&.active {
 			border-color: red;
 		}
-		&.black    { @include sprite(1,1,4); color: white; }
-		&.white    { @include sprite(1,2,4); color: black; }
-		&.hoshi    { @include sprite(2,5,1); }
-		&.triangle { @include sprite(3,0,1); }
-		&.circle   { @include sprite(4,0,1); }
-		&.square   { @include sprite(5,0,1); }
-		&.cross    { @include sprite(6,0,1); }
-		&.greyed   { @include sprite(7,0,1); }
-		&.label    { 
-			@include sprite(1,5,1);
-			span {
-				background-color: #f2b06d;
-			}
-		}
-		&.move     {
-			@include sprite(1,1,4);
-			span {
-				color: white;
-				background-color: transparent;
-			}
-		}
 		&.coords {
-			background-position: (2-$grid/2) (-5.4* $grid);
-			input {
-				margin: 4px 0 0 4px;
-			}
-		}
-
-		&.label, &.move    { 
-			span {
-				display: block;
-				width: 3*$grid/4;
-				height: 3*$grid/4;
-				text-align: center;
-				overflow: hidden;
-				margin: $grid/8;
-				font-size: 16px;
-				line-height: 3*$grid/4;
-			}		
-		}
-		.settings {
-			position: absolute;
-			display: none;
-			top: $grid;
-			left: 0;
-			z-index: 1000;
+			border-top: 1px dotted black;
+			border-left: 1px dotted black;
+			width: $grid - 10;
+			height: $grid - 10;
 			padding: 5px;
-			border: 1px solid rgba(0,0,0,0.1);
-			background-color: #f2b06d;
-			background-image: none;
-			font-size: 13px;
-			line-height: $grid;
-			&.move {
-				width: 180px;
+		}
+		&.toggle {
+			font-size: $grid;
+			line-height: $grid;			
+		}
+	}
+	.settings {
+		position: absolute;
+		display: none;
+		top: $grid;
+		left: 0;
+		z-index: 1000;
+		padding: 3px;
+		border: 1px solid rgba(0,0,0,0.1);
+		background-color: #f2b06d;
+		font-size: 13px;
+		line-height: $grid;
+		&.moves {
+			width: 2*$grid;
+			.move {
+				float: left;
 			}
-			.label {
-				width: 70px;
-				position: relative;
-				span {
-					cursor: pointer;
-					display: block;
+			.colorswitch {
+				width: 2*$grid;
+				.color {
 					float: left;
-					text-align: center;
-					font-size: 16px;
-					background-color: #f2b06d;
 				}
+			}
+			input.movenum {
+				width: (3/2) * $grid;
+			}
+		}
+		&.labels {
+			width: 3*$grid;
+			.label {
+				float: left;
 			}
 		}
 	}

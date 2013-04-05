@@ -12,10 +12,10 @@
 <body>
 	<div class="help">
 		<ul>
-			<li>Click any item in the toolbar to change to that tool.</li>
+			<li>Click any item in the toolbar to change to that tool. Click again for options (if available for that tool).</li>
 			<li>Markers can go on empty intersections or stones, labels only on empty intersection.</li>
-			<li>Move numbers move up automatically (but can be set manually). Right-click the last move to undo it.</li>
-			<li>Clicking the stone with 1 on it on the far right of the toolbar changes the starting color.</li>
+			<li>Move numbers move up automatically (but can be set manually). Right-click a move to remove it (this also resets the move number)</li>
+			<li>Starting move number and color can be set in the options for the move tool.</li>
 			<li>When the tool is the black stone, right click makes white stones, and vice-versa.</li>
 			<li>You can drag any corner or edge of the board to resize the view port, thus creating partial board diagrams.</li>
 		</ul>
@@ -25,70 +25,71 @@
 	</div>
 	<div id="template">
 		<div class="tools bar">
-			<div data-tool="black"    class="black stone tool active"></div>
-			<div data-tool="white"    class="white stone tool"></div>
-			<div data-tool="move"     class="move tool">
-				<span>1</span>
-				<div class="settings move">
-					<label for"move">Move:
-						<select class="moves" name="move"></select>
-					</label><br/>
-					First move number: <input type="text" name="movenumber" class="movenumber" size="2" value="1"/><br/>
-					Color of the first move:
-					<form>
-						<label><input type="radio" name="color" value="black" checked="checked"/>Black</label>
-						<label><input type="radio" name="color" value="white"/>White</label>
-					</form>				
-				</div>			
-			</div>
-			<div data-tool="hoshi"    class="hoshi tool"></div>
-			<div data-tool="triangle" class="marker tool triangle"></div>
-			<div data-tool="circle"   class="marker tool circle"></div>
-			<div data-tool="square"   class="marker tool square"></div>
-			<div data-tool="cross"    class="marker tool cross"></div>
-			<div data-tool="label"    class="label tool"><span class='current'>a</span>
-				<div class="settings label">
-					<div class="labels"></div>
-				</div>
-			</div>
-			<div data-tool="greyed"   class="marker tool greyed"></div>
-			<div data-tool="coords"   class="coords tool">
-				<input type="checkbox" name="coords" class="coords">
-			</div>
+			<ul>
+				<li><div data-tool="black"    class="sprite black stone tool active"></div></li>
+				<li><div data-tool="white"    class="sprite white stone tool"></div></li>
+				<li><div data-tool="move"     class="sprite black move tool"><span class='current number'>1</span></div>
+					<div class="settings moves">
+						<form><input type="text" value="1" class="movenum"></form>
+						<div class="colorswitch">
+							<div class="current color sprite black normal" style="text-align: right;">&larr;</div>
+							<div class="other color sprite white normal">&rarr;</div>
+						</div>
+					</div>
+				</li>
+				<li><div data-tool="hoshi"    class="sprite hoshi tool"></div></li>
+				<li><div data-tool="triangle" class="sprite marker tool triangle"></div></li>
+				<li><div data-tool="circle"   class="sprite marker tool circle"></div></li>
+				<li><div data-tool="square"   class="sprite marker tool square"></div></li>
+				<li><div data-tool="cross"    class="sprite marker tool cross"></div></li>
+				<li><div data-tool="label"    class="sprite label tool"><span class='current letter'>a</span></div>
+					<div class="settings labels">
+					</div>
+				</li>
+				<li><div data-tool="greyed"   class="sprite marker tool greyed"></div></li>
+				<li><div data-tool="toggle"   class="sprite toggle tool">&times;</div></li>
+				<li><div data-tool="coords"   class="sprite coords tool">
+					<input type="checkbox" name="coords" class="coords">
+					</div>
+				</li>
+				<li>
+					<div class="caption">
+						<input type="text" class="caption" name="caption" placeholder="diagram caption">
+					</div>
+				</li>
+			</ul>
 			<div class="close button">&times;</div>
 		</div>
 		<div class="main">
 			<div class="column">
 				<div class="board">
 					<div class="grid">
-						<div class="data">
-							<table></table>
-						</div>
-						<div class="viewport">
-						</div>
+						<div class="data"></div>
+						<div class="viewport"></div>
 						<div class="overlay">
+							<div class="letters"></div>
+							<div class="numbers"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="column">
-				<textarea class="output">
-					output
-				</textarea>
+				<textarea class="output"></textarea>
 			</div>
 		</div>
 		<div class="bottom bar">
 			<button class="follow">Create follow-up diagram</button>
-			<div class="caption">
-				<input type="text" class="caption" name="caption" placeholder="diagram caption">
-			</div>
 		</div>
 	</div>
 	<div id="diagrams">
 
 	</div>
 	<div id="meta">
-		New empty diagram: <input type="text" id="width" value="19" size="2"> &times; <input type="text" id="height" value="19" size="2"> <input id="create" type="button" value="Create new diagram">
+		<form>
+			New empty diagram: 
+			<input type="text" id="width" name="width" value="19" size="2">&times;<input type="text" id="height" name="height" value="19" size="2">
+			<input id="create" type="button" value="Create new diagram">
+		</form>
 	</div>
 </body>
 </html>

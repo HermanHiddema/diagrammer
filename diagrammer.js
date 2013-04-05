@@ -3,6 +3,8 @@
  * and bind all the relevant code to mouse clicks.
  */
 
+var grid = 23;
+
 function create_diagram(width, height) {
 	diagram = $('<div class="diagram"/>').html($('#template').html());
 	diagram.data('width', width);
@@ -11,22 +13,24 @@ function create_diagram(width, height) {
 	diagram.data('oddcolor', 'black');
 	diagram.data('evencolor', 'white');
 	diagram.data('label', 'a');
+	diagram.data('movenum', '1');
+	diagram.data('startnum', '1');
 
-	labels = diagram.find('.tool.label .labels');
+	labels = diagram.find('.settings.labels');
 	for (var i = 97; i < 123; i++) {
-		$('<div class="label"><span data-prev="'+String.fromCharCode(i-1)+'">'+String.fromCharCode(i)+'</span></div>').appendTo(labels).on('click', 'span', function(){
-			next_label_from($(this).closest('.diagram'), $(this).data('prev'));
+		$('<div class="sprite label"><span class="letter">'+String.fromCharCode(i)+'</span></div>').appendTo(labels).on('click', 'span', function(){
+			set_label($(this).closest('.diagram'), $(this).text());
 			$(this).closest('.settings').slideUp();
 		});
 	}
-	$('<div class="label"><span style="color:red">&times</span></div>').appendTo(labels).on('click', function(){
-		$(this).closest('.settings').slideUp();
-	});
 
 
-	moves = diagram.find('select.moves');
+	moves = diagram.find('.settings.moves');
 	for (var i = 1; i < 11; i++) {
-		$('<option>'+i+'</option>').attr('value', i == 10 ? 0 : i).appendTo(moves);
+		$('<div class="sprite normal move '+(i%2?"black":"white")+'" data-char="'+(i==10?0:i)+'"><span class="number">'+i+'</span></div>').appendTo(moves).on('click', 'span', function(){
+			set_movenum($(this).closest('.diagram'), $(this).closest('.move').data('char'));
+			$(this).closest('.settings').slideUp();
+		});
 	}
 
 	diagram.find('.viewport, .grid, .board, .overlay').css({
@@ -40,15 +44,12 @@ function create_diagram(width, height) {
 	for (row = 0; row < height; row++) {
 		table_row = $('<tr />');
 		for (col = 0; col < width; col++) {
-			cell = $('<td />').addClass('empty');
+			cell = $('<td />').addClass('sprite empty');
 
+			if (col==0)        { cell.addClass('left'  ); }
+			if (row==0)        { cell.addClass('top'   ); }
 			if (col==width-1)  { cell.addClass('right' ); }
-			else if (col==0)   { cell.addClass('left'  ); }
-			else               { cell.addClass('center'); }
-
 			if (row==height-1) { cell.addClass('bottom'); }
-			else if (row==0)   { cell.addClass('top'   ); }
-			else               { cell.addClass('middle'); }
 
 			if (is_hoshi(col, row, width-1, height-1)) {
 				cell.addClass('hoshi');
@@ -79,6 +80,7 @@ function create_diagram(width, height) {
 			case 'greyed': marker($(this), tool); break;
 			case 'label': label($(this)); break;
 			case 'move': move($(this)); break;
+			case 'toggle': toggle($(this)); break;
 		}
 		generate_output($(this).closest('.diagram'));
 	});
@@ -101,33 +103,39 @@ function create_diagram(width, height) {
 			return
 		}
 		$(this).closest('.tools').find('.tool.active').removeClass('active');
-	  	$(this).closest('.diagram').data('tool', $(this).data('tool'))
-	  	$(this).addClass('active');
+		$(this).closest('.diagram').data('tool', $(this).data('tool'))
+		$(this).addClass('active');
 	});
 
-	diagram.on('contextmenu', '.tool', function() {
-		$(this).find('.settings').slideDown()
+	diagram.on('click', '.tool.active, .pref', function() {
+		$(this).closest('li').find('.settings').slideToggle()
 		return false;
-	}).on('click', '.settings .label', function() {
 	});
 
-	diagram.on('change', ".move.settings input:radio[name='color']", function(){
+	diagram.on('change', ".moves.settings input.movenum", function() {
+		renumber($(this).closest('.diagram'))
+		$(this).closest('.settings').slideUp()
+	});
+
+	diagram.on('click', ".moves.settings .colorswitch", function(){
+		$(this).find('.color').toggleClass('black white');
 		switchcolor($(this).closest('.diagram'))
 	});
 
-	diagram.on('change', ".move.settings input.movenumber", function() {
-		renumber($(this).closest('.diagram'))
+	diagram.on('change', ".tool.coords input.coords", function() {
+		generate_output($(this).closest('.diagram'));
 	});
 
 	diagram.on('click', '.close.button', function(){
 	  	$(this).closest('.diagram').slideUp(500, function() {$(this).remove();});
 	});
 
-	diagram.on('blur', 'input.caption', function(){
+	diagram.on('keyup', 'input.caption', function(){
 		generate_output($(this).closest('.diagram'))
 	});
 
 	diagram.on('click', 'button.follow', function() {
+		$(this).closest('.diagram').find('.viewport').resizable('destroy');
 		newdiagram = $(this).closest('.diagram').clone(true);
 		newdiagram.find('.data tr td').each(function(){
 			clear($(this));
@@ -137,10 +145,24 @@ function create_diagram(width, height) {
 		generate_output(newdiagram);
 		newdiagram.css('display', 'none');
 		$(this).closest('.diagram').after(newdiagram);
+		grid = parseInt($('<div class="board"/>').css('font-size'));
+
+		$(this).closest('.diagram').find('.viewport').resizable({
+			grid:[grid,grid],
+			handles: 'n, e, s, w, ne, se, sw, nw',
+			containment: 'parent',
+			resize: resized
+		});
+		newdiagram.find('.viewport').resizable({
+			grid:[grid,grid],
+			handles: 'n, e, s, w, ne, se, sw, nw',
+			containment: 'parent',
+			resize: resized
+		});
+		$(this).closest('.diagram').find('.ui-resizable-se').removeClass('ui-icon ui-icon-gripsmall-diagonal-se');
+		newdiagram.find('.ui-resizable-se').removeClass('ui-icon ui-icon-gripsmall-diagonal-se');
 		newdiagram.slideDown(1000);
 	});
-
-	grid = parseInt($('<div class="board"/>').css('font-size'));
 
 	diagram.find('.viewport').resizable({
 		grid:[grid,grid],
@@ -165,7 +187,7 @@ function is_hoshi(x, y, width, height) {
 		return false;
 	}
 	if (2*x == width && 2*y == height && width == height) {
-		return true // always tengen if available (both sides odd length)
+		return true // tengen on square boards
 	}
 	w = false;
 	h = false;
@@ -189,7 +211,7 @@ function is_hoshi(x, y, width, height) {
  */
 
 function generate_output(diagram) {
-	grid = parseInt($('<div class="board"/>').css('font-size'));
+	diagram.find('.settings:visible').not(':animated').slideUp(); // hide visible menus that are not already sliding up
 	viewport = {
 		width:  Math.round(parseInt(diagram.find('.viewport').css('width'))/grid),
 		height: Math.round(parseInt(diagram.find('.viewport').css('height'))/grid),
@@ -206,8 +228,11 @@ function generate_output(diagram) {
 		south: parseInt(diagram.find('.viewport').css('top') ) + parseInt(diagram.find('.viewport').css('height')) == parseInt(diagram.find('.grid').css('height'))
 	}
 
+	// coordinates only work if at least two perpendicular edges are selected
+	coords = diagram.find('input.coords').is(':checked')  && (edges.north || edges.south) && (edges.west || edges.east);
+
 	// make overlay match viewport
-	$(diagram).find('.overlay').css( {
+	diagram.find('.overlay').css( {
 		'width' : viewport.width  + 'em',
 		'height': viewport.height + 'em',
 		'border-left-width'  : viewport.left   + 'em',
@@ -218,10 +243,45 @@ function generate_output(diagram) {
 
 	lines = Array();
 
-	line = diagram.find('.picker').hasClass('black') ? '$$B' : '$$W';
-	line += diagram.find('input.coords').is(':checked') ? 'c' : '';
-	if (diagram.find('.move.settings input.movenumber').val() != '1') {
-		line += 'm' + diagram.find('.move.settings input.movenumber').val();
+	line = '$$'
+	line += diagram.data("oddcolor") == 'black' ? 'B' : 'W';
+
+	if (coords) {
+		line += 'c';
+		if (edges.south) {
+			if (edges.east && !edges.west) {
+				line += diagram.data('width');
+			}
+			numpos = '0 -' + (60-viewport.height) + 'em';
+		}
+		else {
+			if (edges.west) {
+				size = diagram.data('height');
+			}
+			else {
+				size = Math.max(parseInt(diagram.data('width')), parseInt(diagram.data('height')));
+			}
+			line += size
+			size = parseInt(size);
+			numpos = '0 -' + (60-size) + 'em'
+		}
+
+		diagram.find('.numbers').css({
+			'height': viewport.height + 'em',
+			'background-position': numpos,
+		}).show();
+		diagram.find('.letters').css({
+			'width': (viewport.width) + 'em',
+			'background-position':  (0 - viewport.left - 1) + 'em 0',		
+		}).show();
+
+	}
+	else {
+		$(diagram).find('.letters, .numbers').hide();		
+	}
+
+	if (diagram.data('startnum') != '1') {
+		line += 'm' + diagram.data('startnum');
 	}
 	line += ' ' + diagram.find('input.caption').val();
 
@@ -346,11 +406,26 @@ function marker(cell, mark) {
 	}
 }
 
-function next_label_from(diagram, label) {
-	next = String.fromCharCode((97 + (((label.charCodeAt(0)) % 32) % 26)))
-	diagram.find('.tool.label span.current').text(next);
-	diagram.data('label', next);
+function set_label(diagram, label) {
+	diagram.find('.tool.label span.current').text(label);
+	diagram.data('label', label);
 }
+
+function set_movenum(diagram, num) {
+	num = parseInt(num);
+	start = parseInt(diagram.data('startnum'));
+	if (num > 10) {
+		diagram.data('movenum', '11');
+		diagram.find('.tool.move').removeClass('black white').addClass('white');
+		diagram.find('.tool.move>span').html('<span style="color: red">&times;</span>');
+	}
+	else {
+		diagram.data('movenum', num);
+		diagram.find('.tool.move>span').text(num == 10 ? ((9 + start) %100) : (((num-1) + start) %100));
+		diagram.find('.tool.move').removeClass('black white').addClass((num % 2 ? diagram.data('oddcolor'):diagram.data('evencolor')));
+	}
+}
+
 
 function label(cell) {
 	if (!$(cell).hasClass('empty')) {
@@ -364,8 +439,9 @@ function label(cell) {
 		else {
 			clear(cell);
 			cell.data('char', value);
-			cell.append($('<span class="label">'+value+'</span>'))
-			next_label_from(cell.closest('.diagram'), value);
+			cell.append($('<span class="letter">'+value+'</span>'))
+			next = String.fromCharCode((97 + (((value.charCodeAt(0)) % 32) % 26)))
+			set_label(cell.closest('.diagram'), next);
 		}
 	}
 }
@@ -374,64 +450,71 @@ function move(cell) {
 	if (! cell.hasClass('empty')) {
 		return;
 	}
-	sel = cell.closest('.diagram').find('.moves option:selected');
-	clear(cell)
-	cell.data('char', sel.val());
-	cell.append($('<span class="move"/>'));
-	cell.removeClass('empty').addClass('move ' + (sel.val()%2 ? cell.closest('.diagram').data('oddcolor'):cell.closest('.diagram').data('evencolor')));
-	renumber(cell.closest('.diagram'));
-	sel.prop('selected', false).next().prop('selected', true);
+	diagram = cell.closest('.diagram');
+	num = parseInt(diagram.data('movenum'));
+	if (num == 11) {
+		alert("You have reached the maximum move number. You cannot have more than 10 numbers in one diagram. To continue, you can create a follow-up diagram.")
+	}
+	else {
+		start = parseInt(diagram.data('startnum'));
+		clear(cell)
+		cell.data('char', num);
+		cell.append($('<span class="number"/>').text(num == 0 ? ((9 + start) %100) : (((num-1) + start) %100)));
+		cell.removeClass('empty').addClass('move ' + (num % 2 ? diagram.data('oddcolor'):diagram.data('evencolor')));
+		set_movenum(diagram, num+1);
+	}
+}
+
+function toggle(cell) {
+	if (cell.data('char') != '+') {
+		clear(cell);
+		cell.data('char', '+');
+		cell.removeClass('empty black white');
+	}
+	else {
+		cell.addClass('empty');
+		cell.data('char', cell.hasClass('hoshi') ? ',' : '.');
+	}
+	col = cell.parent().children().index(cell);
+	cell.next().toggleClass('left');
+	cell.prev().toggleClass('right');
+	cell.parent().prev().children().eq(col).toggleClass('bottom')
+	cell.parent().next().children().eq(col).toggleClass('top')
 }
 
 function unmove(cell) {
 	if (cell.hasClass('move')) {
+		set_movenum(cell.closest('.diagram'), cell.data('char'));
 		cell.removeClass('black white').addClass('empty');
 		clear(cell);
-		sel = cell.closest('.diagram').find('.moves option:selected');
-		sel.prop('selected', false).prev().prop('selected', true);
 	}
 }
 
 function renumber(diagram) {
-	diagram.find('td.move').each(function(){
-		cell = $(this)
-		start = parseInt(cell.closest('.diagram').find('.move.settings input.movenumber').val());
-		number = parseInt(cell.data('char'))
+	start = parseInt(diagram.find('.moves.settings input.movenum').val());
+	if (isNaN(start)) {
+		diagram.find('.moves.settings input.movenum').val(diagram.data('startnum'))
+		return;
+	}
+	diagram.data('startnum', start)
+	diagram.find('td.move, .moves.settings div.move').each(function(){
+		start = parseInt($(this).closest('.diagram').data('startnum'))
+		number = parseInt($(this).data('char'))
 		if (number == 0) number = 10; 
 		mynum = (start + number - 1) % 100;
 		if (mynum == 0) mynum = '00';
-		cell.find('span').text(mynum);
+		$(this).find('span.number').text(mynum);
 	})
-	diagram.find('.move.settings select option').each(function(){
-		start = parseInt($(this).closest('.diagram').find('.move.settings input.movenumber').val());
-		number = parseInt($(this).val())
-		number = !number ? 10 : number;
-		mynum = (start + number - 1) % 100;
-		$(this).text(''+mynum); 
-	});
+	set_movenum(diagram, diagram.data('movenum'))
 	generate_output(diagram);
 }
 
 function switchcolor(diagram) {
-	newcolor = diagram.find(".move.settings input:radio[name='color']:checked").val()
-	if (newcolor == diagram.data('oddcolor')) {
-		return; // no change
-	}
-	if (newcolor == 'black') {
-		diagram.data('oddcolor', 'black');
-		diagram.data('evencolor', 'white');
-	}
-	else {
-		diagram.data('oddcolor', 'white');
-		diagram.data('evencolor', 'black');
-	}
-	diagram.find('td.move').each(function() {
-		if ($(this).hasClass('black')) {
-			$(this).addClass('white').removeClass('black');
-		}
-		else {
-			$(this).addClass('black').removeClass('white');  			
-		}
+	newcolor = diagram.data('evencolor');
+	diagram.data('evencolor', diagram.data('oddcolor'));
+	diagram.data('oddcolor', newcolor);
+	diagram.find('td.move, .moves.settings div.move').each(function() {
+		$(this).toggleClass('black white');
 	});
 	generate_output(diagram);
 }
@@ -441,8 +524,8 @@ function switchcolor(diagram) {
  */
 
 $(document).on('click', '#create', function(){
-	width = Math.max(2, Math.min(50, parseInt($('#width').val())));
-	height = Math.max(2, Math.min(50, parseInt($('#height').val())));
+	width = Math.max(1, Math.min(59, parseInt($('#width').val())));
+	height = Math.max(1, Math.min(59, parseInt($('#height').val())));
 	diagram = create_diagram(width, height)
 	diagram.css('display', 'none').appendTo($('#diagrams')).slideDown(1000);
 })
