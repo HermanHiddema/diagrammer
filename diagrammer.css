@@ -709,6 +709,7 @@ table {
   padding: 3px; }
 
 .showhelp {
+  cursor: pointer;
   position: relative;
   border-color: #ccc;
   border-width: 0 1px 1px 1px;
