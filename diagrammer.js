@@ -65,7 +65,12 @@ function create_diagram(width, height) {
 	}
 	diagram.find('.data').html('').append(table)
 	diagram.find('div.caption').css('width', (width+1) + 'em').find('input.caption').css('width', '100%')
-	diagram.find('.output').attr('rows', height+3).attr('cols', 2*width+6).attr('wrap', 'off').attr('readonly','readonly').on('click', function(){$(this).select();});
+	diagram.find('.output').attr('rows', height+3).attr('cols', 2*width+6).attr('wrap', 'off').attr('readonly','readonly').on('click', function(){
+		if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+			$(this).removeAttr('readonly');
+		}
+		$(this).select();
+	});
 
 	diagram.on('click', 'td', function(){
 		tool = $(this).closest('.diagram').data('tool');

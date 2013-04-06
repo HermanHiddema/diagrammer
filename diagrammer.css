@@ -670,7 +670,8 @@ table {
             position: relative;
             width: 23px;
             height: 23px;
-            padding: 0; }
+            padding: 0;
+            cursor: pointer; }
       .diagram .board .grid .viewport {
         overflow: hidden;
         pointer-events: none; }
@@ -779,7 +780,8 @@ h4 {
     text-align: center;
     border-width: 1px;
     border-color: #f2b06d;
-    border-style: solid; }
+    border-style: solid;
+    cursor: pointer; }
     .tools .tool.active {
       border-color: red; }
     .tools .tool.coords {
@@ -805,8 +807,10 @@ h4 {
     .tools .settings.moves {
       width: 46px; }
       .tools .settings.moves .move {
-        float: left; }
+        float: left;
+        cursor: pointer; }
       .tools .settings.moves .colorswitch {
+        cursor: pointer;
         width: 46px; }
         .tools .settings.moves .colorswitch .color {
           float: left; }
@@ -815,6 +819,7 @@ h4 {
     .tools .settings.labels {
       width: 69px; }
       .tools .settings.labels .label {
+        cursor: pointer;
         float: left; }
   .tools .close.button {
     cursor: pointer;
